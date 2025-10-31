@@ -16,7 +16,11 @@ Music-People is a music software. It include regular practice functions such as 
 ## Group Members:
 
 Aristotle Stokes
+
 Ethan Tang
+
 Kai Yun Chao
+
 Mo Spiegel
+
 Simon Sakata
