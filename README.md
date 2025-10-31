@@ -8,5 +8,6 @@
 
 ## Classes
 
-##Group Members
-**i**
+##Group Members:
+
+Kai Yun Chao
