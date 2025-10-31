@@ -14,6 +14,7 @@ Music-People is a music software. It include regular practice functions such as 
 ## Classes
 
 ## Group Members:
+
 Aristotle Stokes
 Ethan Tang
 Kai Yun Chao
