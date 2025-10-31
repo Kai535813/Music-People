@@ -3,9 +3,9 @@
 **Classification: Utility Tool**
 
 ## Discription:
-_________ is a software.
+Music-People is a music software. It include regular practice functions such as a tuner and metronome. On top of that it has a harmonizer and ear training functions.
 
-
+## Time-Line
 
 ![Mock UI](https://github.com/Kai535813/Music-People/blob/main/Images/2AE14CDD-1265-470C-9B15F49024186C10_source.jpg.webp?raw=true)
 
