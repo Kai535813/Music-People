@@ -9,7 +9,7 @@ Music-People is a music software. It includes regular practice functions such as
 
 ![Mock UI](https://github.com/Kai535813/Music-People/blob/main/Images/Screenshot%202025-10-31%206.32.28%20PM.png?raw=true)
 
-![Diagram]()
+![Diagram](https://github.com/Kai535813/Music-People/blob/main/Images/Music%20Application%20UML.jpg?raw=true)
 
 ## Classes:
 
