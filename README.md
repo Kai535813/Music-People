@@ -13,8 +13,6 @@ Music-People is a music software. It includes regular practice functions such as
 
 ![Time Line](https://github.com/Kai535813/Music-People/blob/main/Images/Screenshot%202025-10-31%207.41.49%20PM.png?raw=true)
 
-## Classes:
-
 ## Group Members:
 
 Aristotle Stokes
