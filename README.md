@@ -1,9 +1,9 @@
-# Music-People
+# Musikhelfer
 
 **Classification: Utility Tool**
 
 ## Discription:
-Music-People is a music software. It includes regular practice functions such as a tuner and metronome. On top of that it has a harmonizer and ear training functions.
+Musikhelfer is a music software. It includes regular practice functions such as a tuner and metronome. On top of that it has a harmonizer and ear training functions.
 
 ## GUI:
 
