@@ -1,5 +1,4 @@
 import processing.sound.*;
-hh
 StringList inputScore;
 StringList harmonizeRes;
 InputNote[] notes = new InputNote[1];
@@ -27,7 +26,7 @@ void setup() {
 void draw() {
   background(75);
   setGradient(0, 0, width/5, height, c1, c2, Y_AXIS);
-  modeButtons[0] = new Button();
+  modeButtons[0] = new Button
 }
 
 void setGradient(int x, int y, float w, float h, color c1, color c2, int axis) {
