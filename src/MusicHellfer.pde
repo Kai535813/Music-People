@@ -23,6 +23,10 @@ void setup() {
   noteTog = 1;
 }
 
+void mouseReleased() {
+
+}
+
 void draw() {
   background(75);
   setGradient(0, 0, width/5, height, c1, c2, Y_AXIS);
