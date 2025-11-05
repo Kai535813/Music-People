@@ -1,3 +1,5 @@
+//This is compatible with Mo's Note Class: Ethan, you may have to take into account the additional variables I've added here
+
 Note[] notes = new Note[1];
 int noteTog;
 //Note Position: Tracks where the note lands on the score
@@ -38,3 +40,4 @@ void draw() {
 
 void mouseReleased() {
 }
+
