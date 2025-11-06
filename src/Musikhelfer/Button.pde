@@ -1,10 +1,9 @@
 class Button {
-  //Member variables
+  // Member variables
   int x, y, w, h;
   color c1, c2;
   String disVal, val;
   boolean over;
-
 
   // Constructor
   Button(int x, int y, int w, int h, color c1, color c2, String val, String disVal) {
@@ -18,23 +17,42 @@ class Button {
     this.c2 = c2;
     over = false;
   }
+
   // Member Methods
   void display() {
     rectMode(CENTER);
-    if (over == true) {
-      fill(c2);
+    noStroke();
+
+    // Choose gradient direction
+    int gradientAxis = Y_AXIS;
+
+    // Change brightness when hovered
+    if (over) {
+      // Make gradient slightly brighter on hover
+      color hoverC1 = lerpColor(c1, color(255), 0.2);
+      color hoverC2 = lerpColor(c2, color(255), 0.2);
+      setGradient(x - w/2, y - h/2, w, h, hoverC1, hoverC2, gradientAxis);
     } else {
-      fill(c1);
+      setGradient(x - w/2, y - h/2, w, h, c1, c2, gradientAxis);
     }
+
+    // Optional: draw button border
+    stroke(0);
+    strokeWeight(2);
+    noFill();
     rect(x, y, w, h, 25);
+
+    // Draw button text
     fill(0);
+    noStroke();
     textAlign(CENTER, CENTER);
     textSize(20);
     text(val, x, y);
   }
 
   void hover(int tempX, int tempY) {
-    if (x>tempX-w/2 && x<tempX+w/2 && y>tempY-h/2 && y <tempY+h/2) {
+    // Check if the mouse is within the bounds
+    if (tempX > x - w/2 && tempX < x + w/2 && tempY > y - h/2 && tempY < y + h/2) {
       over = true;
     } else {
       over = false;
