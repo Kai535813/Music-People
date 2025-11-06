@@ -15,6 +15,9 @@ boolean ntInputted1, ntInputted2, ntInputted3, ntInputted4;
 int Y_AXIS = 1;
 int X_AXIS = 2;
 color c1, c2;
+PFont myFont;
+int x=x
+
 
 void setup() {
   size(600, 700);
@@ -31,10 +34,13 @@ void setup() {
   ntInputted2 = false;
   ntInputted3 = false;
   ntInputted4 = false;
-  modeButtons[0]=new Button(60, 120, 100, 100, #ffffff, #000000, "pitch", "Pitch Ear Training");
-  modeButtons[1]=new Button(60, 270, 100, 100, #ffffff, #000000, "tune", "Tuner");
-  modeButtons[2]=new Button(60, 420, 100, 100, #ffffff, #000000, "harm", "Harmonizer");
-  modeButtons[3]=new Button(60, 570, 100, 100, #ffffff, #000000, "metro", "Metronome");
+  
+  myFont = loadFont("AppleSDGothic.vlw");
+  textFont(myFont);
+  modeButtons[0]=new Button(60, 120, 100, 100, #5E86D8, #6C6C6C, "Pitch", "Pitch Ear Training");
+  modeButtons[1]=new Button(60, 270, 100, 100, #5E86D8, #6C6C6C, "Tune", "Tuner");
+  modeButtons[2]=new Button(60, 420, 100, 100, #5E86D8, #6C6C6C, "Harm", "Harmonizer");
+  modeButtons[3]=new Button(60, 570, 100, 100, #5E86D8, #6C6C6C, "Metro", "Metronome");
 }
 
 void mouseReleased() {
@@ -70,8 +76,32 @@ void setGradient(int x, int y, float w, float h, color c1, color c2, int axis) {
   }
 }
 
-void display() {
-}
+  void display() {
+    rectMode(CENTER);
+    noStroke();
+
+    // Slightly brighten on hover
+    if (over) {
+      color hoverC1 = lerpColor(c1, color(255), 0.2);
+      color hoverC2 = lerpColor(c2, color(255), 0.2);
+      setGradient(x - w/2, y - h/2, w, h, hoverC1, hoverC2, Y_AXIS);
+    } else {
+      setGradient(x - w/2, y - h/2, w, h, c1, c2, Y_AXIS);
+    }
+
+    // Border
+    stroke(0);
+    strokeWeight(2);
+    noFill();
+    rect(x, y, w, h, 25);
+
+    // Label
+    fill(0);
+    noStroke();
+    textAlign(CENTER, CENTER);
+    textSize(20);
+    text(val, x, y);
+  }
 
 void tunerMode() {
 }
@@ -90,7 +120,7 @@ void harmMode() {
   line(40, 110, 540, 110);
   line(40, 130, 540, 130);
   for (int i = 0; i<notes.length; i = i + 1) {
-    notes[i].hover();
+    notes[i].hover(mouseX, mouseY);
     notes[i].inputNote();
   }
 }
