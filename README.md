@@ -19,7 +19,7 @@ Aristotle Stokes: Display/Programically Drawing GUI
 
 Ethan Tang: Coding main application file
 
-Kai Yun Chao: PImages
+Kai Yun Chao: PImages, Sound
 
 Mo Spiegel: Coding Note Class
 
