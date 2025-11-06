@@ -90,7 +90,7 @@ void harmMode() {
   line(40, 110, 540, 110);
   line(40, 130, 540, 130);
   for (int i = 0; i<notes.length; i = i + 1) {
-    notes[i].hover(mouseX, mouseY);
+    notes[i].hover();
     notes[i].inputNote();
   }
 }
