@@ -47,7 +47,7 @@ class Button {
     noStroke();
     textAlign(CENTER, CENTER);
     textSize(20);
-    text(val, x, y);
+    text(disVal, x, y,w,h);
   }
 
   void hover(int tempX, int tempY) {
