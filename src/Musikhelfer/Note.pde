@@ -5,25 +5,35 @@ class Note {
   //Member variables
   color c1, c2;
   int x;
-  int nPos;
-  boolean show;
+  boolean updatable, inputted, mouseClicked;
+
+  //Tracks where the mouse is clicked (where the note is to be inputted)
   int clickX, clickY;
 
   //Constructor
-  Note(color c1, color c2, int x, int nPos, boolean show) {
+  Note(color c1, color c2, int x, boolean updatable, boolean inputted) {
+
+    //Hover color
     this.c1 = c1;
+
+    //Inputted note color
     this.c2 = c2;
+    
+    //x-position on score
     this.x = x;
-    this.nPos = nPos;
-    this.show = show;
+
+    //Tracks whether the note's appearance updates
+    this.updatable = updatable;
+
+    //Tracks whether the note has been inputted
+    this.inputted = inputted;
   }
 
   //Member Methods
 
+  //Draws hovering note that snaps to score following user's cursor
   void hover() {
-
-    //Quarter Note Hovering
-    if (show == true) {
+    if (updatable == true && inputted == false) {
       stroke(c1);
       fill(c1);
       if (noteTog == 1) {
@@ -42,51 +52,80 @@ class Note {
     }
   }
 
-  void inputNote() {
-    if (mousePressed == true && show == true) {
-      clickX = mouseX;
-      clickY =  mouseY;
-      show = false;
-    }
-      if (nPos == 1) {
-        strokeWeight(2);
-        fill(c2);
-        stroke(c2);
-        if (clickX>= 40 && clickX<=540 && clickY> 35 && clickY< 45) {
-          ellipse(70, 40, 10, 10);
-          line(65, 40, 65, 70);
-        } else if (clickX>= 40 && clickX<=540 && clickY> 45 && clickY < 55) {
-          ellipse(70, 50, 10, 10);
-          line(65, 50, 65, 80);
-        } else if (clickX>= 40 && clickX<=540 && clickY> 55 && clickY < 65) {
-          ellipse(70, 60, 10, 10);
-          line(65, 60, 65, 90);
-        } else if (clickX>= 40 && clickX<=540 && clickY> 65 && clickY < 75) {
-          ellipse(70, 70, 10, 10);
-          line(65, 70, 65, 100);
-        } else if (clickX>= 40 && clickX<=540 && clickY> 75 && clickY < 85) {
-          ellipse(70, 80, 10, 10);
-          line(65, 80, 65, 110);
-        } else if (clickX>= 40 && clickX<=540 && clickY> 85 && clickY < 95) {
-          ellipse(70, 90, 10, 10);
-          line(65, 90, 65, 120);
-        } else if (clickX>= 40 && clickX<=540 && clickY> 95 && clickY < 105) {
-          ellipse(70, 100, 10, 10);
-          line(75, 100, 75, 70);
-        } else if (clickX>= 40 && clickX<=540 && clickY> 105 && clickY < 115) {
-          ellipse(70, 110, 10, 10);
-          line(75, 110, 75, 80);
-        } else if (clickX>= 40 && clickX<=540 && clickY> 115 && clickY < 125) {
-          ellipse(70, 120, 10, 10);
-          line(75, 120, 75, 90);
-        } else if (clickX>= 40 && clickX<=540 && clickY> 125 && clickY < 135) {
-          ellipse(70, 130, 10, 10);
-          line(75, 130, 75, 100);
-        } else if (clickX>= 40 && clickX<=540 && clickY> 135 && clickY < 145) {
-          ellipse(70, 140, 10, 10);
-          line(75, 140, 75, 110);
-        }
+    //Draws a note when it is inputted (mouse clicked)
+    void inputNote() {
+      
+      //Update updatable and inputted
+      if (x== 70 && mouseClicked == true && updatable == true && mouseX>= 40 && mouseX<=540 && mouseY> 30 && mouseY<150) {
+        clickX = mouseX;
+        clickY =  mouseY;
+        updatable = false;
+        inputted = true;
+        notes[1].updatable = true;
+      } else if (x == 170 && mouseClicked == true && updatable == true && mouseX>= 40 && mouseX<=540 && mouseY> 30 && mouseY<150) {
+        clickX = mouseX;
+        clickY = mouseY;
+        updatable = false;
+        inputted = true;
+        notes[2].updatable = true;
+      } else if (x == 270 && mouseClicked == true && updatable == true && mouseX>= 40 && mouseX<=540 && mouseY> 30 && mouseY<150) {
+        clickX = mouseX;
+        clickY = mouseY;
+        updatable = false;
+        inputted = true;
+        notes[3].updatable = true;
+      } else if (x == 370 && mouseClicked == true && updatable == true && mouseX>= 40 && mouseX<=540 && mouseY> 30 && mouseY<150) {
+        clickX = mouseX;
+        clickY = mouseY;
+        inputted = true;
+        updatable = false;
+      }
+      
+      //Draw note
+      strokeWeight(2);
+      fill(c2);
+      stroke(c2);
+      if (clickX>= 40 && clickX<=540 && clickY> 35 && clickY< 45) {
+        ellipse(x, 40, 10, 10);
+        line(x-5, 40, x-5, 70);
+      } else if (clickX>= 40 && clickX<=540 && clickY> 45 && clickY < 55) {
+        ellipse(x, 50, 10, 10);
+        line(x-5, 50, x-5, 80);
+      } else if (clickX>= 40 && clickX<=540 && clickY> 55 && clickY < 65) {
+        ellipse(x, 60, 10, 10);
+        line(x-5, 60, x-5, 90);
+      } else if (clickX>= 40 && clickX<=540 && clickY> 65 && clickY < 75) {
+        ellipse(x, 70, 10, 10);
+        line(x-5, 70, x-5, 100);
+      } else if (clickX>= 40 && clickX<=540 && clickY> 75 && clickY < 85) {
+        ellipse(x, 80, 10, 10);
+        line(x-5, 80, x-5, 110);
+      } else if (clickX>= 40 && clickX<=540 && clickY> 85 && clickY < 95) {
+        ellipse(x, 90, 10, 10);
+        line(x-5, 90, x-5, 120);
+      } else if (clickX>= 40 && clickX<=540 && clickY> 95 && clickY < 105) {
+        ellipse(x, 100, 10, 10);
+        line(x+5, 100, x+5, 70);
+      } else if (clickX>= 40 && clickX<=540 && clickY> 105 && clickY < 115) {
+        ellipse(x, 110, 10, 10);
+        line(x+5, 110, x+5, 80);
+      } else if (clickX>= 40 && clickX<=540 && clickY> 115 && clickY < 125) {
+        ellipse(x, 120, 10, 10);
+        line(x+5, 120, x+5, 90);
+      } else if (clickX>= 40 && clickX<=540 && clickY> 125 && clickY < 135) {
+        ellipse(x, 130, 10, 10);
+        line(x+5, 130, x+5, 100);
+      } else if (clickX>= 40 && clickX<=540 && clickY> 135 && clickY < 145) {
+        ellipse(x, 140, 10, 10);
+        line(x+5, 140, x+5, 110);
       }
     }
   
+  //Update mouseClicked when a click has been completed
+  void mouseClick() {
+    if (mouseClicked == false) {
+      mouseClicked = true;
+      
+    }
+  }
 }
