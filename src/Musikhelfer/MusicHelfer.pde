@@ -1,5 +1,5 @@
 //Ethan Tang | 3B | 11/4/25
-//import processing.sound.*;
+import processing.sound.*;
 //Create 4 Notes (only quarter notes for now)
 Note[] notes = new Note[4];
 //Set Note value (only quarter notes for now)
