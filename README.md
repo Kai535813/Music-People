@@ -15,12 +15,12 @@ Musikhelfer is a music software. It includes regular practice functions such as 
 
 ## Group Members:
 
-Aristotle Stokes: Display/Programically Drawing GUI
+**Aristotle Stokes: Display/Programically Drawing GUI**
 
-Ethan Tang: Coding main application file
+**Ethan Tang: Coding main application file**
 
-Kai Yun Chao: PImages, Sound
+**Kai Yun Chao: PImages, Sound**
 
-Mo Spiegel: Coding Note Class
+**Mo Spiegel: Coding Note Class**
 
-Simon Sakata: Coding Button Class
+**Simon Sakata: Coding Button Class**
