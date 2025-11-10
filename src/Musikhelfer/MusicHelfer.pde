@@ -1,8 +1,13 @@
-import processing.sound.*;
+//Ethan Tang | 3B | 11/4/25
+//import processing.sound.*;
+//Create 4 Notes (only quarter notes for now)
+Note[] notes = new Note[4];
+//Set Note value (only quarter notes for now)
+int noteTog;
+//Detect whether a mouse has been pressed and released
+boolean mouseClicked, firstSwitch;
 StringList inputScore;
 StringList harmonizeRes;
-Note[] notes = new Note[1];
-int noteTog;
 Button[] modeButtons=new Button[4];
 Button[] tuneButtons=new Button[1];
 Button[] harmButtons=new Button[12];
@@ -10,40 +15,59 @@ Button[] metro=new Button[3];
 int modeTog, clef;
 String buttonVal, tuneNote;
 Boolean play;
-boolean np1, np2, np3, np4;
-boolean ntInputted1, ntInputted2, ntInputted3, ntInputted4;
 int Y_AXIS = 1;
 int X_AXIS = 2;
 color c1, c2;
 PFont myFont;
-int x=x
 
 
 void setup() {
   size(600, 700);
   c1 = color(#5E86D8);
   c2 = color(#6C6C6C);
-  noLoop();
-  notes[0] = new Note(125);
+  modeButtons[0]=new Button(60, 120, 100, 100, #5E86D8, #6C6C6C, "1", "Pitch Ear Training");
+  modeButtons[1]=new Button(60, 270, 100, 100, #5E86D8, #6C6C6C, "2", "Tuner");
+  modeButtons[2]=new Button(60, 420, 100, 100, #5E86D8, #6C6C6C, "3", "Harmonizer");
+  modeButtons[3]=new Button(60, 570, 100, 100, #5E86D8, #6C6C6C, "4", "Metronome");
+  notes[0] = new Note(125, 0, 220, true, false);
+  notes[1] = new Note(125, 0, 220+90*1, false, false);
+  notes[2] = new Note(125, 0, 220+90*2, false, false);
+  notes[3] = new Note(125, 0, 220+90*3, false, false);
   noteTog = 1;
-  np1 = true;
-  np2 = false;
-  np3 = false;
-  np4 = false;
-  ntInputted1 = false;
-  ntInputted2 = false;
-  ntInputted3 = false;
-  ntInputted4 = false;
-  
-  myFont = loadFont("AppleSDGothic.vlw");
-  textFont(myFont);
-  modeButtons[0]=new Button(60, 120, 100, 100, #5E86D8, #6C6C6C, "Pitch", "Pitch Ear Training");
-  modeButtons[1]=new Button(60, 270, 100, 100, #5E86D8, #6C6C6C, "Tune", "Tuner");
-  modeButtons[2]=new Button(60, 420, 100, 100, #5E86D8, #6C6C6C, "Harm", "Harmonizer");
-  modeButtons[3]=new Button(60, 570, 100, 100, #5E86D8, #6C6C6C, "Metro", "Metronome");
+  mouseClicked = false;
 }
 
 void mouseReleased() {
+  for (int i=0; i<modeButtons.length; i++) {
+    if (modeButtons[i].hover(mouseX, mouseY)) {
+      modeTog=int(modeButtons[i].val);
+      firstSwitch=true;
+    }
+  }
+  if (modeTog==3&&firstSwitch==true) {
+    firstSwitch=false;
+  }else if(modeTog==3&&firstSwitch==false){
+  //Run inputNote (essentially display) methods once a click is detected
+  if (mouseClicked == false) {
+    if (notes[0].updatable == true) {
+      notes[0].mouseClick();
+      notes[0].inputNote();
+      mouseClicked = false;
+    } else if (notes[0].updatable == false && notes[1].updatable == true) {
+      notes[1].mouseClick();
+      notes[1].inputNote();
+      mouseClicked = false;
+    } else if (notes[1].updatable == false && notes[2].updatable == true) {
+      notes[2].mouseClick();
+      notes[2].inputNote();
+      mouseClicked = false;
+    } else if (notes[2].updatable == false && notes[3].updatable == true) {
+      notes[3].mouseClick();
+      notes[3].inputNote();
+      mouseClicked = false;
+    }
+  }
+}
 }
 
 void draw() {
@@ -53,6 +77,16 @@ void draw() {
     modeButtons[i].display();
     modeButtons[i].hover(mouseX, mouseY);
   }
+  if (modeTog==3) {
+    harmMode();
+  }
+  fill(0);
+  strokeWeight(1);
+  line(140, 50, 580, 50);
+  line(140, 70, 580, 70);
+  line(140, 90, 580, 90);
+  line(140, 110, 580, 110);
+  line(140, 130, 200, 130);
 }
 
 void setGradient(int x, int y, float w, float h, color c1, color c2, int axis) {
@@ -76,32 +110,10 @@ void setGradient(int x, int y, float w, float h, color c1, color c2, int axis) {
   }
 }
 
-  void display() {
-    rectMode(CENTER);
-    noStroke();
-
-    // Slightly brighten on hover
-    if (over) {
-      color hoverC1 = lerpColor(c1, color(255), 0.2);
-      color hoverC2 = lerpColor(c2, color(255), 0.2);
-      setGradient(x - w/2, y - h/2, w, h, hoverC1, hoverC2, Y_AXIS);
-    } else {
-      setGradient(x - w/2, y - h/2, w, h, c1, c2, Y_AXIS);
-    }
-
-    // Border
-    stroke(0);
-    strokeWeight(2);
-    noFill();
-    rect(x, y, w, h, 25);
-
-    // Label
-    fill(0);
-    noStroke();
-    textAlign(CENTER, CENTER);
-    textSize(20);
-    text(val, x, y);
-  }
+void display() {
+  rectMode(CENTER);
+  noStroke();
+}
 
 void tunerMode() {
 }
@@ -110,17 +122,13 @@ void metroMode() {
 }
 
 void harmMode() {
+  rectMode(CORNER);
   strokeWeight(1);
   fill(255);
-  rect(40, 30, 500, 120);
-  fill(0);
-  line(40, 50, 540, 50);
-  line(40, 70, 540, 70);
-  line(40, 90, 540, 90);
-  line(40, 110, 540, 110);
-  line(40, 130, 540, 130);
+  rect(140, 30, 440, 120);
+  line(140, 130, 580, 130);
   for (int i = 0; i<notes.length; i = i + 1) {
-    notes[i].hover(mouseX, mouseY);
+    notes[i].hover();
     notes[i].inputNote();
   }
 }
