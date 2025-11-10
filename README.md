@@ -7,7 +7,7 @@ Musikhelfer is a music software. It includes regular practice functions such as 
 
 ## GUI:
 
-![Mock UI](https://github.com/Kai535813/Music-People/blob/main/Images/Screenshot%202025-10-31%206.32.28%20PM.png?raw=true)
+![Mock UI](https://github.com/Kai535813/Musikhelfer/blob/main/images/UIDesign.png?raw=true)
 
 ![Diagram](https://github.com/Kai535813/Music-People/blob/main/Images/Music%20Application%20UML.jpg?raw=true)
 
