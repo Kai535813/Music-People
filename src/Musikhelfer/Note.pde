@@ -1,3 +1,4 @@
+
 //Mo Spiegel | 3B
 
 class Note {
@@ -38,11 +39,11 @@ class Note {
       fill(c1);
       if (noteTog == 1) {
         for (int i = 35; i<145; i = i + 10) {
-          if (mouseX>= 40 && mouseX<=540 && mouseY> i && mouseY< i+10 && mouseY<95) {
+          if (mouseX>= 140 && mouseX<=580 && mouseY> i && mouseY< i+10 && mouseY<95) {
             ellipse(x, i+5, 10, 10);
             strokeWeight(2);
             line(x-5, i+5, x-5, i+35);
-          } else if (mouseX>= 40 && mouseX<=540 && mouseY> i && mouseY < i+10 && mouseY >95) {
+          } else if (mouseX>= 140 && mouseX<=580 && mouseY> i && mouseY < i+10 && mouseY >95) {
             ellipse(x, i+5, 10, 10);
             strokeWeight(2);
             line(x+5, i+5, x+5, i-25);
@@ -56,25 +57,25 @@ class Note {
     void inputNote() {
       
       //Update updatable and inputted
-      if (x== 70 && mouseClicked == true && updatable == true && mouseX>= 40 && mouseX<=540 && mouseY> 30 && mouseY<150) {
+      if (x== 220 && mouseClicked == true && updatable == true && mouseX>= 140 && mouseX<=580 && mouseY> 30 && mouseY<150) {
         clickX = mouseX;
         clickY =  mouseY;
         updatable = false;
         inputted = true;
         notes[1].updatable = true;
-      } else if (x == 170 && mouseClicked == true && updatable == true && mouseX>= 40 && mouseX<=540 && mouseY> 30 && mouseY<150) {
+      } else if (x == 220+90*1 && mouseClicked == true && updatable == true && mouseX>= 140 && mouseX<=580 && mouseY> 30 && mouseY<150) {
         clickX = mouseX;
         clickY = mouseY;
         updatable = false;
         inputted = true;
         notes[2].updatable = true;
-      } else if (x == 270 && mouseClicked == true && updatable == true && mouseX>= 40 && mouseX<=540 && mouseY> 30 && mouseY<150) {
+      } else if (x == 220+90*2 && mouseClicked == true && updatable == true && mouseX>= 140 && mouseX<=580 && mouseY> 30 && mouseY<150) {
         clickX = mouseX;
         clickY = mouseY;
         updatable = false;
         inputted = true;
         notes[3].updatable = true;
-      } else if (x == 370 && mouseClicked == true && updatable == true && mouseX>= 40 && mouseX<=540 && mouseY> 30 && mouseY<150) {
+      } else if (x == 220+90*3 && mouseClicked == true && updatable == true && mouseX>= 140 && mouseX<=580 && mouseY> 30 && mouseY<150) {
         clickX = mouseX;
         clickY = mouseY;
         inputted = true;
@@ -85,37 +86,37 @@ class Note {
       strokeWeight(2);
       fill(c2);
       stroke(c2);
-      if (clickX>= 40 && clickX<=540 && clickY> 35 && clickY< 45) {
+      if (clickX>= 140 && clickX<=580 && clickY> 35 && clickY< 45) {
         ellipse(x, 40, 10, 10);
         line(x-5, 40, x-5, 70);
-      } else if (clickX>= 40 && clickX<=540 && clickY> 45 && clickY < 55) {
+      } else if (clickX>= 140 && clickX<=580 && clickY> 45 && clickY < 55) {
         ellipse(x, 50, 10, 10);
         line(x-5, 50, x-5, 80);
-      } else if (clickX>= 40 && clickX<=540 && clickY> 55 && clickY < 65) {
+      } else if (clickX>= 140 && clickX<=580 && clickY> 55 && clickY < 65) {
         ellipse(x, 60, 10, 10);
         line(x-5, 60, x-5, 90);
-      } else if (clickX>= 40 && clickX<=540 && clickY> 65 && clickY < 75) {
+      } else if (clickX>= 140 && clickX<=580 && clickY> 65 && clickY < 75) {
         ellipse(x, 70, 10, 10);
         line(x-5, 70, x-5, 100);
-      } else if (clickX>= 40 && clickX<=540 && clickY> 75 && clickY < 85) {
+      } else if (clickX>= 140 && clickX<=580 && clickY> 75 && clickY < 85) {
         ellipse(x, 80, 10, 10);
         line(x-5, 80, x-5, 110);
-      } else if (clickX>= 40 && clickX<=540 && clickY> 85 && clickY < 95) {
+      } else if (clickX>= 140 && clickX<=580 && clickY> 85 && clickY < 95) {
         ellipse(x, 90, 10, 10);
         line(x-5, 90, x-5, 120);
-      } else if (clickX>= 40 && clickX<=540 && clickY> 95 && clickY < 105) {
+      } else if (clickX>= 140 && clickX<=580 && clickY> 95 && clickY < 105) {
         ellipse(x, 100, 10, 10);
         line(x+5, 100, x+5, 70);
-      } else if (clickX>= 40 && clickX<=540 && clickY> 105 && clickY < 115) {
+      } else if (clickX>= 140 && clickX<=580 && clickY> 105 && clickY < 115) {
         ellipse(x, 110, 10, 10);
         line(x+5, 110, x+5, 80);
-      } else if (clickX>= 40 && clickX<=540 && clickY> 115 && clickY < 125) {
+      } else if (clickX>= 140 && clickX<=580 && clickY> 115 && clickY < 125) {
         ellipse(x, 120, 10, 10);
         line(x+5, 120, x+5, 90);
-      } else if (clickX>= 40 && clickX<=540 && clickY> 125 && clickY < 135) {
+      } else if (clickX>= 140 && clickX<=580 && clickY> 125 && clickY < 135) {
         ellipse(x, 130, 10, 10);
         line(x+5, 130, x+5, 100);
-      } else if (clickX>= 40 && clickX<=540 && clickY> 135 && clickY < 145) {
+      } else if (clickX>= 140 && clickX<=580 && clickY> 135 && clickY < 145) {
         ellipse(x, 140, 10, 10);
         line(x+5, 140, x+5, 110);
       }
