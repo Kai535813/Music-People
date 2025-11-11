@@ -1,0 +1,142 @@
+//import processing.sound.*;
+StringList inputScore;
+StringList harmonizeRes;
+Note[] notes = new Note[1];
+int noteTog;
+Button[] modeButtons=new Button[4];
+Button[] tuneButtons=new Button[1];
+Button[] harmButtons=new Button[12];
+Button[] metro=new Button[3];
+PImage img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11;
+int modeTog, clef;
+String buttonVal, tuneNote;
+Boolean play;
+boolean np1, np2, np3, np4;
+boolean ntInputted1, ntInputted2, ntInputted3, ntInputted4;
+int Y_AXIS = 1;
+int X_AXIS = 2;
+color c1, c2;
+
+void setup() {
+  size(600, 700);
+  img1 = loadImage("Eight Note.png");
+  img2 = loadImage("Quarter Note.png");
+  img3 = loadImage("Sixteenth Note.png");
+  img4 = loadImage("rHalf Note.png");
+  // img5 = loadImage("rWhole Note.png");
+  img6 = loadImage("rFlat.png");
+   img7 = loadImage("Final Sharp.png");
+  img8 = loadImage("rBass Clef.png");
+  img9 = loadImage("rTreble Clef.png");
+  img10 = loadImage("rQuarter Rest.png");
+ img11 = loadImage("Final Play.png");
+
+  img1.resize(40, 80);
+ img2.resize(40, 80);
+  img3.resize(40, 80);
+  img4.resize(40, 80);
+  //  img5.resize(40, 80);
+  img6.resize(40, 80);
+   img7.resize(40, 80);
+  img8.resize(80, 160);
+  img9.resize(80, 160);
+  img10.resize(40, 80);
+  img11.resize(160, 160);
+  c1 = color(#5E86D8);
+  c2 = color(#6C6C6C);
+  noLoop();
+  notes[0] = new Note(125);
+  noteTog = 1;
+  np1 = true;
+  np2 = false;
+  np3 = false;
+  np4 = false;
+  ntInputted1 = false;
+  ntInputted2 = false;
+  ntInputted3 = false;
+  ntInputted4 = false;
+  modeButtons[0]=new Button(60, 120, 100, 100, #ffffff, #000000, "pitch", "Pitch Ear Training");
+  modeButtons[1]=new Button(60, 270, 100, 100, #ffffff, #000000, "tune", "Tuner");
+  modeButtons[2]=new Button(60, 420, 100, 100, #ffffff, #000000, "harm", "Harmonizer");
+  modeButtons[3]=new Button(60, 570, 100, 100, #ffffff, #000000, "metro", "Metronome");
+}
+
+void mouseReleased() {
+}
+
+void draw() {
+  background(75);
+  setGradient(0, 0, width/5, height, c1, c2, Y_AXIS);
+  for (int i=0; i<modeButtons.length; i++) {
+    modeButtons[i].display();
+    modeButtons[i].hover(mouseX, mouseY);
+  }
+  harmMode();
+}
+
+void setGradient(int x, int y, float w, float h, color c1, color c2, int axis) {
+
+  noFill();
+
+  if (axis == Y_AXIS) { //Top to bottom gradient
+    for (int i = y; i < y + h; i++) {
+      float inter = map(i, y, y+h, 0, 1);
+      color c = lerpColor(c1, c2, inter);
+      stroke(c);
+      line(x, i, x + w, i);
+    }
+  } else if (axis == X_AXIS) {  // Left to right gradient
+    for (int i = x; i < x + w; i++) {
+      float inter = map(i, x, x + w, 0, 1);
+      color c = lerpColor(c1, c2, inter);
+      stroke(c);
+      line(i, y, i, y + h);
+    }
+  }
+}
+
+void display() {
+}
+
+void tunerMode() {
+}
+
+void metroMode() {
+}
+
+void harmMode() {
+  
+
+  
+  strokeWeight(1);
+  fill(255);
+  rect(40, 30, 500, 120);
+  fill(0);
+  line(40, 50, 540, 50);
+  line(40, 70, 540, 70);
+  line(40, 90, 540, 90);
+  line(40, 110, 540, 110);
+  line(40, 130, 540, 130);
+  for (int i = 0; i<notes.length; i = i + 1) {
+    notes[i].hover(mouseX, mouseY);
+    notes[i].inputNote();
+  }
+    
+ image(img1, 100, 50);
+  image(img2, 200, 50);
+  image(img3, 300, 50);
+  image(img4, 400, 50);
+  //  image(img5, 100, 40);
+  image(img6, 500, 50);
+   image(img7, 50, 40);
+  image(img8, 600, 50);
+  image(img9, 100, 150);
+  image(img10, 200, 150);
+   image(img11, 200, 80);
+}
+
+void harmonize() {
+}
+
+void play() {
+}
