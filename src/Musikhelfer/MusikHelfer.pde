@@ -21,6 +21,30 @@ PFont myFont;
 
 
 void setup() {
+ img1 = loadImage("Eight Note.png");
+  img2 = loadImage("Quarter Note.png");
+  img3 = loadImage("Sixteenth Note.png");
+  img4 = loadImage("rHalf Note.png");
+  // img5 = loadImage("rWhole Note.png");
+  img6 = loadImage("rFlat.png");
+   img7 = loadImage("Final Sharp.png");
+  img8 = loadImage("rBass Clef.png");
+  img9 = loadImage("rTreble Clef.png");
+  img10 = loadImage("rQuarter Rest.png");
+ img11 = loadImage("Final Play.png");
+
+  img1.resize(40, 80);
+ img2.resize(40, 80);
+  img3.resize(40, 80);
+  img4.resize(40, 80);
+  //  img5.resize(40, 80);
+  img6.resize(40, 80);
+   img7.resize(40, 80);
+  img8.resize(80, 160);
+  img9.resize(80, 160);
+  img10.resize(40, 80);
+  img11.resize(160, 160);
+
   //Temporary
   modeTog = 3;
 
