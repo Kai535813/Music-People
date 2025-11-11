@@ -1,5 +1,6 @@
 //Ethan Tang | 3B | 11/4/25
 import processing.sound.*;
+PImage[] noteImages = new PImage[11];
 //Create 4 Notes (only quarter notes for now)
 Note[] notes = new Note[4];
 //Set Note value (only quarter notes for now)
@@ -22,29 +23,29 @@ PFont myFont;
 
 
 void setup() {
-  img1 = loadImage("Eight Note.png");
-  img2 = loadImage("Quarter Note.png");
-  img3 = loadImage("Sixteenth Note.png");
-  img4 = loadImage("rHalf Note.png");
-  // img5 = loadImage("rWhole Note.png");
-  img6 = loadImage("rFlat.png");
-  img7 = loadImage("Final Sharp.png");
-  img8 = loadImage("rBass Clef.png");
-  img9 = loadImage("rTreble Clef.png");
-  img10 = loadImage("rQuarter Rest.png");
-  img11 = loadImage("Final Play.png");
+  noteImages[0] = loadImage("Eight Note.png");
+  noteImages[1] = loadImage("Quarter Note.png");
+  noteImages[2] = loadImage("Sixteenth Note.png");
+  noteImages[3] = loadImage("rHalf Note.png");
+  noteImages[4] = loadImage("Whole Note.jpg");
+  noteImages[5] = loadImage("rFlat.png");
+  noteImages[6] = loadImage("Final Sharp.png");
+  noteImages[7] = loadImage("rBass Clef.png");
+  noteImages[8] = loadImage("rTreble Clef.png");
+  noteImages[9] = loadImage("rQuarter Rest.png");
+  noteImages[10] = loadImage("Final Play.png");
 
-  img1.resize(40, 80);
-  img2.resize(40, 80);
-  img3.resize(40, 80);
-  img4.resize(40, 80);
-  //  img5.resize(40, 80);
-  img6.resize(40, 80);
-  img7.resize(40, 80);
-  img8.resize(80, 160);
-  img9.resize(80, 160);
-  img10.resize(40, 80);
-  img11.resize(160, 160);
+  noteImages[0].resize(40, 80);
+  noteImages[1].resize(40, 80);
+  noteImages[2].resize(40, 80);
+  noteImages[3].resize(40, 80);
+  noteImages[4].resize(40, 80);
+  noteImages[5].resize(40, 80);
+  noteImages[6].resize(40, 80);
+  noteImages[7].resize(80, 160);
+  noteImages[8].resize(80, 160);
+  noteImages[9].resize(40, 80);
+  noteImages[10].resize(160, 160);
   size(600, 700);
   c1 = color(#5E86D8);
   c2 = color(#6C6C6C);
@@ -155,17 +156,17 @@ void harmMode() {
     notes[i].inputNote();
   }
 
-  image(img1, 100, 50);
-  image(img2, 200, 50);
-  image(img3, 300, 50);
-  image(img4, 400, 50);
-  //  image(img5, 100, 40);
-  image(img6, 500, 50);
-  image(img7, 50, 40);
-  image(img8, 600, 50);
-  image(img9, 100, 150);
-  image(img10, 200, 150);
-  image(img11, 200, 80);
+  image(noteImages[0], 100, 50);
+  image(noteImages[1], 200, 50);
+  image(noteImages[2], 300, 50);
+  image(noteImages[3], 400, 50);
+  image(noteImages[4], 100, 40);
+  image(noteImages[5], 500, 50);
+  image(noteImages[6], 50, 40);
+  image(noteImages[7], 600, 50);
+  image(noteImages[8], 100, 150);
+  image(noteImages[9], 200, 150);
+  image(noteImages[10], 200, 80);
 }
 
 void harmonize() {
