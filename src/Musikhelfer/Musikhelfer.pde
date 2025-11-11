@@ -91,6 +91,7 @@ void mouseReleased() {
   }
 }
 
+//Aristotle Stokes (gradient stuff)
 void draw() {
   background(75);
   setGradient(0, 0, width/5, height, c1, c2, Y_AXIS);
