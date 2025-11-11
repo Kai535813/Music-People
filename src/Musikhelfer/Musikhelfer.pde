@@ -1,4 +1,5 @@
 //Ethan Tang | 3B | 11/4/25
+import processing.sound.*;
 //Create 4 Notes (only quarter notes for now)
 Note[] notes = new Note[4];
 //Set Note value (only quarter notes for now)
@@ -21,33 +22,29 @@ PFont myFont;
 
 
 void setup() {
- img1 = loadImage("Eight Note.png");
+  img1 = loadImage("Eight Note.png");
   img2 = loadImage("Quarter Note.png");
   img3 = loadImage("Sixteenth Note.png");
   img4 = loadImage("rHalf Note.png");
   // img5 = loadImage("rWhole Note.png");
   img6 = loadImage("rFlat.png");
-   img7 = loadImage("Final Sharp.png");
+  img7 = loadImage("Final Sharp.png");
   img8 = loadImage("rBass Clef.png");
   img9 = loadImage("rTreble Clef.png");
   img10 = loadImage("rQuarter Rest.png");
- img11 = loadImage("Final Play.png");
+  img11 = loadImage("Final Play.png");
 
   img1.resize(40, 80);
- img2.resize(40, 80);
+  img2.resize(40, 80);
   img3.resize(40, 80);
   img4.resize(40, 80);
   //  img5.resize(40, 80);
   img6.resize(40, 80);
-   img7.resize(40, 80);
+  img7.resize(40, 80);
   img8.resize(80, 160);
   img9.resize(80, 160);
   img10.resize(40, 80);
   img11.resize(160, 160);
-
-  //Temporary
-  modeTog = 3;
-
   size(600, 700);
   c1 = color(#5E86D8);
   c2 = color(#6C6C6C);
@@ -64,7 +61,12 @@ void setup() {
 }
 
 void mouseReleased() {
-
+  for (int i=0; i<modeButtons.length; i++) {
+    if (modeButtons[i].hover(mouseX, mouseY)) {
+      modeTog=int(modeButtons[i].val);
+      firstSwitch=true;
+    }
+  }
   if (modeTog==3&&firstSwitch==true) {
     firstSwitch=false;
   } else if (modeTog==3&&firstSwitch==false) {
@@ -91,7 +93,6 @@ void mouseReleased() {
   }
 }
 
-//Aristotle Stokes (gradient stuff)
 void draw() {
   background(75);
   setGradient(0, 0, width/5, height, c1, c2, Y_AXIS);
@@ -101,22 +102,14 @@ void draw() {
   }
   if (modeTog==3) {
     harmMode();
-    fill(255);
-    strokeWeight(1);
-    rectMode(CORNER);
-    rect(140, 30, 440, 120);
-    rectMode(CENTER);
-    stroke(0);
-    line(140, 50, 580, 50);
-    line(140, 70, 580, 70);
-    line(140, 90, 580, 90);
-    line(140, 110, 580, 110);
-    line(140, 130, 580, 130);
-    for (int i = 0; i<notes.length; i = i + 1) {
-      notes[i].hover();
-      notes[i].inputNote();
-    }
   }
+  fill(0);
+  strokeWeight(1);
+  line(140, 50, 580, 50);
+  line(140, 70, 580, 70);
+  line(140, 90, 580, 90);
+  line(140, 110, 580, 110);
+  line(140, 130, 580, 130);
 }
 
 void setGradient(int x, int y, float w, float h, color c1, color c2, int axis) {
@@ -161,6 +154,18 @@ void harmMode() {
     notes[i].hover();
     notes[i].inputNote();
   }
+
+  image(img1, 100, 50);
+  image(img2, 200, 50);
+  image(img3, 300, 50);
+  image(img4, 400, 50);
+  //  image(img5, 100, 40);
+  image(img6, 500, 50);
+  image(img7, 50, 40);
+  image(img8, 600, 50);
+  image(img9, 100, 150);
+  image(img10, 200, 150);
+  image(img11, 200, 80);
 }
 
 void harmonize() {
