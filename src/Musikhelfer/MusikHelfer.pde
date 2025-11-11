@@ -1,5 +1,4 @@
 //Ethan Tang | 3B | 11/4/25
-import processing.sound.*;
 //Create 4 Notes (only quarter notes for now)
 Note[] notes = new Note[4];
 //Set Note value (only quarter notes for now)
@@ -22,6 +21,9 @@ PFont myFont;
 
 
 void setup() {
+  //Temporary
+  modeTog = 3;
+
   size(600, 700);
   c1 = color(#5E86D8);
   c2 = color(#6C6C6C);
@@ -38,36 +40,31 @@ void setup() {
 }
 
 void mouseReleased() {
-  for (int i=0; i<modeButtons.length; i++) {
-    if (modeButtons[i].hover(mouseX, mouseY)) {
-      modeTog=int(modeButtons[i].val);
-      firstSwitch=true;
-    }
-  }
+
   if (modeTog==3&&firstSwitch==true) {
     firstSwitch=false;
-  }else if(modeTog==3&&firstSwitch==false){
-  //Run inputNote (essentially display) methods once a click is detected
-  if (mouseClicked == false) {
-    if (notes[0].updatable == true) {
-      notes[0].mouseClick();
-      notes[0].inputNote();
-      mouseClicked = false;
-    } else if (notes[0].updatable == false && notes[1].updatable == true) {
-      notes[1].mouseClick();
-      notes[1].inputNote();
-      mouseClicked = false;
-    } else if (notes[1].updatable == false && notes[2].updatable == true) {
-      notes[2].mouseClick();
-      notes[2].inputNote();
-      mouseClicked = false;
-    } else if (notes[2].updatable == false && notes[3].updatable == true) {
-      notes[3].mouseClick();
-      notes[3].inputNote();
-      mouseClicked = false;
+  } else if (modeTog==3&&firstSwitch==false) {
+    //Run inputNote (essentially display) methods once a click is detected
+    if (mouseClicked == false) {
+      if (notes[0].updatable == true) {
+        notes[0].mouseClick();
+        notes[0].inputNote();
+        mouseClicked = false;
+      } else if (notes[0].updatable == false && notes[1].updatable == true) {
+        notes[1].mouseClick();
+        notes[1].inputNote();
+        mouseClicked = false;
+      } else if (notes[1].updatable == false && notes[2].updatable == true) {
+        notes[2].mouseClick();
+        notes[2].inputNote();
+        mouseClicked = false;
+      } else if (notes[2].updatable == false && notes[3].updatable == true) {
+        notes[3].mouseClick();
+        notes[3].inputNote();
+        mouseClicked = false;
+      }
     }
   }
-}
 }
 
 void draw() {
@@ -79,14 +76,22 @@ void draw() {
   }
   if (modeTog==3) {
     harmMode();
+    fill(255);
+    strokeWeight(1);
+    rectMode(CORNER);
+    rect(140, 30, 440, 120);
+    rectMode(CENTER);
+    stroke(0);
+    line(140, 50, 580, 50);
+    line(140, 70, 580, 70);
+    line(140, 90, 580, 90);
+    line(140, 110, 580, 110);
+    line(140, 130, 580, 130);
+    for (int i = 0; i<notes.length; i = i + 1) {
+      notes[i].hover();
+      notes[i].inputNote();
+    }
   }
-  fill(0);
-  strokeWeight(1);
-  line(140, 50, 580, 50);
-  line(140, 70, 580, 70);
-  line(140, 90, 580, 90);
-  line(140, 110, 580, 110);
-  line(140, 130, 200, 130);
 }
 
 void setGradient(int x, int y, float w, float h, color c1, color c2, int axis) {
