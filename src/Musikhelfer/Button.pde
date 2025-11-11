@@ -1,3 +1,4 @@
+// Simon Sakata 3B
 class Button {
   // Member variables
   int x, y, w, h;
