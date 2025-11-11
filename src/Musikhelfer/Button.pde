@@ -1,4 +1,4 @@
-// Simon Sakata 3B
+
 class Button {
   // Member variables
   int x, y, w, h;
@@ -51,12 +51,14 @@ class Button {
     text(disVal, x, y,w,h);
   }
 
-  void hover(int tempX, int tempY) {
+  boolean hover(int tempX, int tempY) {
     // Check if the mouse is within the bounds
     if (tempX > x - w/2 && tempX < x + w/2 && tempY > y - h/2 && tempY < y + h/2) {
       over = true;
+      return true;
     } else {
       over = false;
+      return false;
     }
   }
 }
