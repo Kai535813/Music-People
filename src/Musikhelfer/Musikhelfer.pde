@@ -59,12 +59,6 @@ void setup() {
   notes[3] = new Note(125, 0, 220+90*3, false, false);
   noteTog = 1;
   mouseClicked = false;
-  //+1 BPM Button
-  metroButtons[0] = new Button(362, 350, 100, 100, 25, #7FA3E0, #5E86D8, "0", "+1");
-  //-1 BPM Button
-  metroButtons[1] = new Button(362, 600, 100, 100, 25, #7FA3E0, #5E86D8, "0", "-1");
-  //Play Button
-  metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY");
 }
 
 void mouseReleased() {
