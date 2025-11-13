@@ -49,10 +49,10 @@ void setup() {
   size(600, 700);
   c1 = color(#5E86D8);
   c2 = color(#6C6C6C);
-  modeButtons[0]=new Button(60, 120, 100, 100, #5E86D8, #6C6C6C, "1", "Pitch Ear Training");
-  modeButtons[1]=new Button(60, 270, 100, 100, #5E86D8, #6C6C6C, "2", "Tuner");
-  modeButtons[2]=new Button(60, 420, 100, 100, #5E86D8, #6C6C6C, "3", "Harmonizer");
-  modeButtons[3]=new Button(60, 570, 100, 100, #5E86D8, #6C6C6C, "4", "Metronome");
+  modeButtons[0]=new Button(60, 120, 100, 100, 25, #7FA3E0, #5E86D8, "1", "Pitch Ear Training");
+  modeButtons[1]=new Button(60, 270, 100, 100, 25, #7FA3E0, #5E86D8, "2", "Tuner");
+  modeButtons[2]=new Button(60, 420, 100, 100, 25, #7FA3E0, #5E86D8, "3", "Harmonizer");
+  modeButtons[3]=new Button(60, 570, 100, 100, 25, #7FA3E0, #5E86D8, "4", "Metronome");
   notes[0] = new Note(125, 0, 220, true, false);
   notes[1] = new Note(125, 0, 220+90*1, false, false);
   notes[2] = new Note(125, 0, 220+90*2, false, false);
