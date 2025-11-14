@@ -1,17 +1,18 @@
-// Simon Sakata 3B
+
 class Button {
   // Member variables
-  int x, y, w, h;
+  int x, y, w, h, r;
   color c1, c2;
   String disVal, val;
   boolean over;
 
   // Constructor
-  Button(int x, int y, int w, int h, color c1, color c2, String val, String disVal) {
+  Button(int x, int y, int w, int h, int r, color c1, color c2, String val, String disVal) {
     this.x = x;
     this.y = y;
     this.w = w;
     this.h = h;
+    this.r = r;
     this.disVal = disVal;
     this.val = val;
     this.c1 = c1;
@@ -23,20 +24,15 @@ class Button {
   void display() {
     rectMode(CENTER);
     noStroke();
-
-    // Choose gradient direction
-    int gradientAxis = Y_AXIS;
-
-    // Change brightness when hovered
-    if (over) {
-      // Make gradient slightly brighter on hover
-      color hoverC1 = lerpColor(c1, color(255), 0.2);
-      color hoverC2 = lerpColor(c2, color(255), 0.2);
-      setGradient(x - w/2, y - h/2, w, h, hoverC1, hoverC2, gradientAxis);
+    if(over) {
+      fill(c1);
     } else {
-      setGradient(x - w/2, y - h/2, w, h, c1, c2, gradientAxis);
+      fill(c2);
     }
+    rect(x,y,w,h,r);
+    
 
+   
     // Optional: draw button border
     stroke(0);
     strokeWeight(2);
