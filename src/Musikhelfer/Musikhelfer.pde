@@ -50,6 +50,7 @@ void setup() {
   size(600, 700);
   c1 = color(#5E86D8);
   c2 = color(#6C6C6C);
+  //Simon Sakata | 3B
   modeButtons[0]=new Button(60, 120, 100, 100, 25, #7FA3E0, #5E86D8, "1", "Pitch Ear Training");
   modeButtons[1]=new Button(60, 270, 100, 100, 25, #7FA3E0, #5E86D8, "2", "Tuner");
   modeButtons[2]=new Button(60, 420, 100, 100, 25, #7FA3E0, #5E86D8, "3", "Harmonizer");
