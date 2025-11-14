@@ -173,6 +173,9 @@ void draw() {
       tuneButtons[i].hover(mouseX, mouseY);
     }
   }
+  if (modeTog==4) {
+    metroMode();
+  }
 }
 
 void setGradient(int x, int y, float w, float h, color c1, color c2, int axis) {
