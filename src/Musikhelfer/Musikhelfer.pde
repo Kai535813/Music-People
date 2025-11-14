@@ -15,7 +15,7 @@ Button[] tuneButtons=new Button[12];
 Button[] harmButtons=new Button[12];
 Button[] metroButtons=new Button[3];
 int modeTog, clef;
-String buttonVal, tuneNote, scoreNote;
+String buttonVal, tuneNote, scoreNote, metroVal;
 Boolean play;
 int Y_AXIS = 1;
 int X_AXIS = 2;
@@ -240,11 +240,20 @@ void metroMode() {
   metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY");
   metroButtons[2].display();
   metroButtons[2].hover(mouseX, mouseY);
-
+  //Hover For Buttons
   for (int i = 0; i < metroButtons.length; i++) {
     metroButtons[i].hover(mouseX, mouseY);
     metroButtons[i].display();
   }
+  
+  //Metronome Display
+  rectMode(CENTER);
+  fill(200);
+  rect(362,150,420,225,25);
+  
+  textAlign(CENTER,CENTER);
+  textSize(42);
+  text("TEST",362,150);
 }
 
 void harmMode() {
