@@ -113,5 +113,8 @@ class Note {
       mouseClicked = true;
     }
   }
+  int yVal() {
+    return round(clickY/10);
+  }
 }
 
