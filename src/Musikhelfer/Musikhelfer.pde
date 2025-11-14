@@ -13,7 +13,7 @@ StringList harmonizeRes;
 Button[] modeButtons=new Button[4];
 Button[] tuneButtons=new Button[12];
 Button[] harmButtons=new Button[12];
-Button[] metro=new Button[3];
+Button[] metroButtons=new Button[3];
 int modeTog, clef;
 String buttonVal, tuneNote, scoreNote;
 Boolean play;
