@@ -57,6 +57,12 @@ void setup() {
   modeButtons[3]=new Button(60, 570, 100, 100, 25, #7FA3E0, #5E86D8, "4", "Metronome");
   clef=1;
   mouseClicked = false;
+  //+1 BPM Button
+  metroButtons[0] = new Button(362, 350, 100, 100, 25, #7FA3E0, #5E86D8, "0", "+1");
+  //-1 BPM Button
+  metroButtons[1] = new Button(362, 600, 100, 100, 25, #7FA3E0, #5E86D8, "0", "-1");
+  //Play Button
+  metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY");
 }
 
 void mouseReleased() {
@@ -219,6 +225,23 @@ void tunerMode() {
 }
 
 void metroMode() {
+  //+1 BPM Button
+  metroButtons[0] = new Button(362, 350, 100, 100, 25, #7FA3E0, #5E86D8, "0", "+1");
+  metroButtons[0].display();
+  metroButtons[0].hover(mouseX, mouseY);
+  //-1 BPM Button
+  metroButtons[1] = new Button(362, 600, 100, 100, 25, #7FA3E0, #5E86D8, "0", "-1");
+  metroButtons[1].display();
+  metroButtons[1].hover(mouseX, mouseY);
+  //Play Button
+  metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY");
+  metroButtons[2].display();
+  metroButtons[2].hover(mouseX, mouseY);
+
+  for (int i = 0; i < metroButtons.length; i++) {
+    metroButtons[i].hover(mouseX, mouseY);
+    metroButtons[i].display();
+  }
 }
 
 void harmMode() {
