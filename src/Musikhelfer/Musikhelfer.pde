@@ -24,17 +24,23 @@ PFont myFont;
 
 
 void setup() {
-  noteImages[0] = loadImage("Eight Note.png");
-  noteImages[1] = loadImage("Quarter Note.png");
-  noteImages[2] = loadImage("Sixteenth Note.png");
-  noteImages[3] = loadImage("rHalf Note.png");
-  noteImages[4] = loadImage("Whole Note.jpg");
-  noteImages[5] = loadImage("rFlat.png");
-  noteImages[6] = loadImage("Final Sharp.png");
-  noteImages[7] = loadImage("rBass Clef.png");
-  noteImages[8] = loadImage("rTreble Clef.png");
-  noteImages[9] = loadImage("rQuarter Rest.png");
-  noteImages[10] = loadImage("Final Play.png");
+  noteImages[0] = loadImage("Quarter Note.png");
+  noteImages[1] = loadImage("Quarter Note (BOTTOM SIDE).png");
+  noteImages[2] = loadImage("Quarter Note (HOVER).png");
+  noteImages[3] = loadImage("Quarter Note (HOVER, BOTTOM SIDE).png");
+  noteImages[4] = loadImage("Eight Note.png");
+  noteImages[5] = loadImage("Eight Note (BOTTOM SIDE).png");
+  noteImages[6] = loadImage("Eight Note (HOVER).png");
+  noteImages[7] = loadImage("Eight Note (HOVER, BOTTOM SIDE).png");
+  noteImages[8] = loadImage("Sixteenth Note.png");
+  noteImages[9] = loadImage("rHalf Note.png");
+  noteImages[10] = loadImage("Whole Note.jpg");
+  noteImages[11] = loadImage("rFlat.png");
+  noteImages[12] = loadImage("Final Sharp.png");
+  noteImages[13] = loadImage("rBass Clef.png");
+  noteImages[14] = loadImage("rTreble Clef.png");
+  noteImages[15] = loadImage("rQuarter Rest.png");
+  noteImages[16] = loadImage("Final Play.png");
 
   noteImages[0].resize(40, 80);
   noteImages[1].resize(40, 80);
@@ -43,10 +49,16 @@ void setup() {
   noteImages[4].resize(40, 80);
   noteImages[5].resize(40, 80);
   noteImages[6].resize(40, 80);
-  noteImages[7].resize(80, 160);
-  noteImages[8].resize(80, 160);
+  noteImages[7].resize(40, 80);
+  noteImages[8].resize(40, 80);
   noteImages[9].resize(40, 80);
-  noteImages[10].resize(160, 160);
+  noteImages[10].resize(40, 80);
+  noteImages[11].resize(40, 80);
+  noteImages[12].resize(40, 80);
+  noteImages[13].resize(40, 80);
+  noteImages[14].resize(80, 160);
+  noteImages[16].resize(80, 160);
+  noteImages[15].resize(40, 80);
   size(600, 700);
   c1 = color(#5E86D8);
   c2 = color(#6C6C6C);
@@ -57,12 +69,18 @@ void setup() {
   modeButtons[3]=new Button(60, 570, 100, 100, 25, #7FA3E0, #5E86D8, "4", "Metronome");
   clef=1;
   mouseClicked = false;
-      //+1 BPM Button
-      metroButtons[0] = new Button(362, 350, 100, 100, 25, #7FA3E0, #5E86D8, "0", "+1");
-      //-1 BPM Button
-      metroButtons[1] = new Button(362, 600, 100, 100, 25, #7FA3E0, #5E86D8, "0", "-1");
-      //Play Button
-      metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY");
+  //+1 BPM Button
+  metroButtons[0] = new Button(362, 350, 100, 100, 25, #7FA3E0, #5E86D8, "0", "+1");
+  //-1 BPM Button
+  metroButtons[1] = new Button(362, 600, 100, 100, 25, #7FA3E0, #5E86D8, "0", "-1");
+  //Play Button
+  metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY");
+  harmButtons[0] = new Button(170,30,60,40,25,#7FA3E0, #5E86D8, "1", "");
+  harmButtons[1] = new Button(245,30,60,40,25,#7FA3E0, #5E86D8, "2", "");
+  harmButtons[2] = new Button(320,30,60,40,25,#7FA3E0, #5E86D8, "3", "");
+  harmButtons[3] = new Button(395,30,60,40,25,#7FA3E0, #5E86D8, "4", "");
+  harmButtons[4] = new Button(470,30,60,40,25,#7FA3E0, #5E86D8, "5", "");
+  harmButtons[5] = new Button(545,30,60,40,25,#7FA3E0, #5E86D8, "6", "");
 }
 
 void mouseReleased() {
@@ -278,20 +296,24 @@ void harmMode() {
   rectMode(CORNER);
   strokeWeight(1);
   fill(255);
-  rect(140, 30, 440, 120);
+  rect(140, 60, 440, 120, 25);
   stroke(0);
   strokeWeight(1);
-  line(140, 50, 580, 50);
-  line(140, 70, 580, 70);
-  line(140, 90, 580, 90);
-  line(140, 110, 580, 110);
-  line(140, 130, 580, 130);
+  line(140, 80, 580, 80);
+  line(140, 100, 580, 100);
+  line(140, 120, 580, 120);
+  line(140, 140, 580, 140);
+  line(140, 160, 580, 160);
   if (notes.size() == 0) {
     notes.add(new Note(125, 0, 220, 2, false));
   }
   for (int i = 0; i < notes.size(); i++) {
     notes.get(i).hover();
     notes.get(i).inputNote();
+  }
+ for (int i = 0; i < harmButtons.length; i++) {
+    harmButtons[i].display();
+    harmButtons[i].hover(mouseX, mouseY);
   }
   if (notes.size()==8) {
     harmonize();
