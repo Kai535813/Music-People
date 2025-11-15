@@ -12,8 +12,9 @@ StringList inputScore;
 StringList harmonizeRes;
 Button[] modeButtons=new Button[4];
 Button[] tuneButtons=new Button[12];
-Button[] harmButtons=new Button[12];
+Button[] harmButtons=new Button[6];
 Button[] metroButtons=new Button[3];
+Button[] pitchButtons=new Button[13];
 int modeTog, clef;
 String buttonVal, tuneNote, scoreNote, metroVal;
 Boolean play;
@@ -81,6 +82,19 @@ void setup() {
   harmButtons[3] = new Button(395,30,60,40,25,#7FA3E0, #5E86D8, "4", "");
   harmButtons[4] = new Button(470,30,60,40,25,#7FA3E0, #5E86D8, "5", "");
   harmButtons[5] = new Button(545,30,60,40,25,#7FA3E0, #5E86D8, "6", "");
+  pitchButtons[0] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Unison");
+  pitchButtons[1] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Minor 2nd");
+  pitchButtons[2] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Major 2nd");
+  pitchButtons[3] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Minor 3rd");
+  pitchButtons[4] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Major 3rd");
+  pitchButtons[5] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Perfect 4th");
+  pitchButtons[6] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Aug 4th/Tritone");
+  pitchButtons[7] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Perfect 5th");
+  pitchButtons[8] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Minor 6th");
+  pitchButtons[9] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Major 6th");
+  pitchButtons[10] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Minor 7th");
+  pitchButtons[11] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Major 7th");
+  pitchButtons[12] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Octave");
 }
 
 void mouseReleased() {
@@ -195,17 +209,20 @@ void draw() {
     modeButtons[i].hover(mouseX, mouseY);
   }
  switch(modeTog){
-case: 2:
+case 1:
+    pitchMode();
+    break;
+case 2:
     tunerMode();
     for (int i = 0; i<tuneButtons.length; i++) {
       tuneButtons[i].display();
       tuneButtons[i].hover(mouseX, mouseY);
     }
     break;
- case: 3;
+ case 3:
     harmMode();
     break;
- case: 4
+ case 4:
     metroMode();
     break;
  }
@@ -261,6 +278,13 @@ void tunerMode() {
   tuneButtons[9]=new Button(300, 540, 80, 80, 25, #7FA3E0, #5E86D8, "", "F#/Gb");
   tuneButtons[10]=new Button(420, 540, 80, 80, 25, #7FA3E0, #5E86D8, "", "G");
   tuneButtons[11]=new Button(540, 540, 80, 80, 25, #7FA3E0, #5E86D8, "", "G#/Ab");
+}
+
+void pitchMode() {
+  for (int i=0; i<pitchButtons.length; i++) {
+  pitchButtons[i].display();
+  pitchButtons[i].hover(mouseX,mouseY);
+  }
 }
 
 void metroMode() {
