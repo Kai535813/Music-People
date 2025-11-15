@@ -57,12 +57,12 @@ void setup() {
   modeButtons[3]=new Button(60, 570, 100, 100, 25, #7FA3E0, #5E86D8, "4", "Metronome");
   clef=1;
   mouseClicked = false;
-  //+1 BPM Button
-  metroButtons[0] = new Button(362, 350, 100, 100, 25, #7FA3E0, #5E86D8, "0", "+1");
-  //-1 BPM Button
-  metroButtons[1] = new Button(362, 600, 100, 100, 25, #7FA3E0, #5E86D8, "0", "-1");
-  //Play Button
-  metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY");
+      //+1 BPM Button
+      metroButtons[0] = new Button(362, 350, 100, 100, 25, #7FA3E0, #5E86D8, "0", "+1");
+      //-1 BPM Button
+      metroButtons[1] = new Button(362, 600, 100, 100, 25, #7FA3E0, #5E86D8, "0", "-1");
+      //Play Button
+      metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY");
 }
 
 void mouseReleased() {
@@ -155,6 +155,19 @@ void mouseReleased() {
   }
 }
 
+//void mousePressed() {
+//Kai Yun Chao | 3B
+//for(int i = 0; i<tuneButtons.length; i++){
+  //if(tuneButtons[i].over&&tuneButtons[i].val.equals("A"))
+  //pitch[].play();
+ //}else if (file.isPlaying()){
+   //file.pause();
+ //}else{
+   //file.play();
+//}
+
+//}
+
 void draw() {
   background(75);
   setGradient(0, 0, width/5, height, c1, c2, Y_AXIS);
@@ -163,19 +176,21 @@ void draw() {
     modeButtons[i].display();
     modeButtons[i].hover(mouseX, mouseY);
   }
-  if (modeTog==3) {
-    harmMode();
-  }
-  if (modeTog==2) {
+ switch(modeTog){
+case: 2:
     tunerMode();
     for (int i = 0; i<tuneButtons.length; i++) {
       tuneButtons[i].display();
       tuneButtons[i].hover(mouseX, mouseY);
     }
-  }
-  if (modeTog==4) {
+    break;
+ case: 3;
+    harmMode();
+    break;
+ case: 4
     metroMode();
-  }
+    break;
+ }
 }
 
 void setGradient(int x, int y, float w, float h, color c1, color c2, int axis) {
@@ -206,25 +221,28 @@ void display() {
 
 void tunerMode() {
   //Kai Yun Chao | 3B
-  //The following code has incomplete and incorrect syntax, so I have commented it out for the time being to ensure that the application can run - Ethan Tang 11/13/25 9:16 PM
+  
+  fill(255);
+  rect(360,120,440,160,25);
+  
   rectMode(CENTER);
   fill(#2B7FD6);
   //rect(370, 233);
   textAlign(CENTER, CENTER);
   textSize(65);
-  //text(tunerNote, x, y);
-  //tuneButtons[0]=new Button(120, 120, 80, 80, 255, "0", "A");
-  //tuneButtons[1]=new Button(120, 120, 80, 80, 255, "0", "A#/Bb");
-  //tuneButtons[2]=new Button(120, 120, 80, 80, 255, "0", "B/Cb");
-  //tuneButtons[3]=new Button(120, 120, 80, 80, 255, "0", "C/B#");
-  //tuneButtons[4]=new Button(120, 120, 80, 80, 255, "0", "C#/Db");
-  //tuneButtons[5]=new Button(120, 120, 80, 80, 255, "0", "D");
-  //tuneButtons[6]=new Button(120, 120, 80, 80, 255, "0", "D#/Eb");
-  //tuneButtons[7]=new Button(120, 120, 80, 80, 255, "0", "E/Fb");
-  //tuneButtons[8]=new Button(120, 120, 80, 80, 255, "0", "F/E#");
-  //tuneButtons[9]=new Button(120, 120, 80, 80, 255, "0", "F#/Gb");
-  //tuneButtons[10]=new Button(120, 120, 80, 80, 255, "0", "G");
-  //tuneButtons[11]=new Button(120, 120, 80, 80, 255, "0", "G#/Ab");
+
+  tuneButtons[0]=new Button(155, 300, 80, 80, 25, #7FA3E0, #5E86D8, "", "A");
+  tuneButtons[1]=new Button(365, 300, 80, 80, 25, #7FA3E0, #5E86D8, "", "A#/Bb");
+  tuneButtons[2]=new Button(420, 300, 80, 80, 25, #7FA3E0, #5E86D8, "", "B/Cb");
+  tuneButtons[3]=new Button(540, 300, 80, 80, 25, #7FA3E0, #5E86D8, "", "C/B#");
+  tuneButtons[4]=new Button(180, 420, 80, 80, 25, #7FA3E0, #5E86D8, "", "C#/Db");
+  tuneButtons[5]=new Button(300, 420, 80, 80, 25, #7FA3E0, #5E86D8, "", "D");
+  tuneButtons[6]=new Button(420, 420, 80, 80, 25, #7FA3E0, #5E86D8, "", "D#/Eb");
+  tuneButtons[7]=new Button(540, 420, 80, 80, 25, #7FA3E0, #5E86D8, "", "E/Fb");
+  tuneButtons[8]=new Button(180, 540, 80, 80, 25, #7FA3E0, #5E86D8, "", "F/E#");
+  tuneButtons[9]=new Button(300, 540, 80, 80, 25, #7FA3E0, #5E86D8, "", "F#/Gb");
+  tuneButtons[10]=new Button(420, 540, 80, 80, 25, #7FA3E0, #5E86D8, "", "G");
+  tuneButtons[11]=new Button(540, 540, 80, 80, 25, #7FA3E0, #5E86D8, "", "G#/Ab");
 }
 
 void metroMode() {
@@ -296,17 +314,17 @@ void harmonize() {
   inputScore=new StringList();
   keyConvert.clear();
   if (clef==1) {
-    keyConvert.put(13, "D");
-    keyConvert.put(12, "E");
-    keyConvert.put(11, "F");
-    keyConvert.put(10, "G");
-    keyConvert.put(9, "A");
-    keyConvert.put(8, "B");
-    keyConvert.put(7, "C");
-    keyConvert.put(6, "D");
-    keyConvert.put(5, "E");
-    keyConvert.put(4, "F");
-    keyConvert.put(3, "G");
+    keyConvert.put(14, "D");
+    keyConvert.put(13, "E");
+    keyConvert.put(12, "F");
+    keyConvert.put(11, "G");
+    keyConvert.put(10, "A");
+    keyConvert.put(9, "B");
+    keyConvert.put(8, "C");
+    keyConvert.put(7, "D");
+    keyConvert.put(6, "E");
+    keyConvert.put(5, "F");
+    keyConvert.put(4, "G");
     for (int i=0; i<notes.size()-1; i++) {
       inputScore.append(keyConvert.get(notes.get(i).yVal()));
     }
