@@ -30,29 +30,30 @@ class Note {
   //Member Methods
 
   //Draws hovering note that snaps to score following user's cursor
+
+  //-----------------------------------------------------------------------------
+  //REPLACED PROGRAMICALLY DRAWN NOTES WITH PIMAGES, SHIFTED POSITIONS
+  //-----------------------------------------------------------------------------
   void hover() {
     stroke(c1);
     fill(c1);
     if (inputted == false) {
-      for (int i = 35; i<145; i = i + 10) {
-        if (mouseX>= 140 && mouseX<=580 && mouseY> i && mouseY< i+10 && mouseY<95) {
+      for (int i = 65; i<175; i = i + 10) {
+        if (mouseX>= 140 && mouseX<=580 && mouseY> i && mouseY< i+10 && mouseY<125) {
           if (noteTog == 1) {
             imageMode(CENTER);
-            image(noteImages[1], x, i+8);
+            image(noteImages[3], x, i+24);
           } else if (noteTog == 2) {
             imageMode(CENTER);
-            image(noteImages[0], x, i+8);
+            image(noteImages[7], x, i+23);
           }
-        } else if (mouseX>= 40 && mouseX<=540 && mouseY> i && mouseY < i+10 && mouseY >95) {
+        } else if (mouseX>= 140 && mouseX<=580 && mouseY> i && mouseY < i+10 && mouseY >125) {
           if (noteTog == 1) {
-            ellipse(x, i+5, 10, 10);
-            strokeWeight(2);
-            line(x+5, i+5, x+5, i-25);
+            imageMode(CENTER);
+            image(noteImages[2], x, i-12);
           } else if (noteTog == 2) {
-            text("8th", x, i-15);
-            ellipse(x, i+5, 10, 10);
-            strokeWeight(2);
-            line(x+5, i+5, x+5, i-25);
+            imageMode(CENTER);
+            image(noteImages[6], x, i-12);
           }
         }
       }
@@ -61,49 +62,96 @@ class Note {
 
   //Draws a note when it is inputted (mouse clicked)
   void inputNote() {
-    if (mouseClicked == true && inputted == false && mouseX>= 40 && mouseX<=540 && mouseY> 30 && mouseY<150) {
+    if (mouseClicked == true && inputted == false && mouseX>= 40 && mouseX<=540 && mouseY> 60 && mouseY<180) {
       clickX = mouseX;
       clickY =  mouseY;
     }
+
+    //-----------------------------------------------------------------------------
+    //REPLACED PROGRAMICALLY DRAWN NOTES WITH PIMAGES, SHIFTED POSITION
+    //-----------------------------------------------------------------------------
 
     //Draw note
     strokeWeight(2);
     fill(c2);
     stroke(c2);
-    if (clickX>= 140 && clickX<=580 && clickY> 35 && clickY< 45) {
-      ellipse(x, 40, 10, 10);
-      strokeWeight(2);
-      line(x-5, 40, x-5, 70);
-    } else if (clickX>= 140 && clickX<=580 && clickY>= 45 && clickY <= 55) {
-      ellipse(x, 50, 10, 10);
-      line(x-5, 50, x-5, 80);
-    } else if (clickX>= 140 && clickX<=580 && clickY> 55 && clickY <= 65) {
-      ellipse(x, 60, 10, 10);
-      line(x-5, 60, x-5, 90);
-    } else if (clickX>= 140 && clickX<=580 && clickY> 65 && clickY <= 75) {
-      ellipse(x, 70, 10, 10);
-      line(x-5, 70, x-5, 100);
-    } else if (clickX>= 140 && clickX<=580 && clickY> 75 && clickY <= 85) {
-      ellipse(x, 80, 10, 10);
-      line(x-5, 80, x-5, 110);
+    if (clickX>= 140 && clickX<=580 && clickY> 65 && clickY< 75) {
+      if (noteTog == 1) {
+        image(noteImages[1], x, 89);
+      } else if (noteTog == 2) {
+        image(noteImages[5], x, 88);
+      }
+      clickY=40;
+    } else if (clickX>= 140 && clickX<=580 && clickY>= 75 && clickY <= 85) {
+      if (noteTog == 1) {
+        image(noteImages[1], x, 99);
+      } else if (noteTog == 2) {
+        image(noteImages[5], x, 98);
+      }
+      clickY=50;
     } else if (clickX>= 140 && clickX<=580 && clickY> 85 && clickY <= 95) {
-      ellipse(x, 90, 10, 10);
-      line(x-5, 90, x-5, 120);
+      if (noteTog == 1) {
+        image(noteImages[1], x, 109);
+      } else if (noteTog == 2) {
+        image(noteImages[5], x, 108);
+      }
+      clickY=60;
     } else if (clickX>= 140 && clickX<=580 && clickY> 95 && clickY <= 105) {
-      ellipse(x, 100, 10, 10);
-      line(x+5, 100, x+5, 70);
+      if (noteTog == 1) {
+        image(noteImages[1], x, 119);
+      } else if (noteTog == 2) {
+        image(noteImages[5], x, 118);
+      }
+      clickY=70;
     } else if (clickX>= 140 && clickX<=580 && clickY> 105 && clickY <= 115) {
-      ellipse(x, 110, 10, 10);
-      line(x+5, 110, x+5, 80);
+      if (noteTog == 1) {
+        image(noteImages[1], x, 129);
+      } else if (noteTog == 2) {
+        image(noteImages[5], x, 128);
+      }
+      clickY=80;
     } else if (clickX>= 140 && clickX<=580 && clickY> 115 && clickY <= 125) {
-      ellipse(x, 120, 10, 10);
-      line(x+5, 120, x+5, 90);
+      if (noteTog == 1) {
+        image(noteImages[1], x, 139);
+      } else if (noteTog == 2) {
+        image(noteImages[5], x, 138);
+      }
+      clickY=90;
     } else if (clickX>= 140 && clickX<=580 && clickY> 125 && clickY <= 135) {
-      ellipse(x, 130, 10, 10);
-      line(x+5, 130, x+5, 100);
+      if (noteTog == 1) {
+        image(noteImages[0], x, 113);
+      } else if (noteTog == 2) {
+        image(noteImages[4], x, 113);
+      }
+      clickY=100;
     } else if (clickX>= 140 && clickX<=580 && clickY> 135 && clickY <= 145) {
-      ellipse(x, 140, 10, 10);
-      line(x+5, 140, x+5, 110);
+      if (noteTog == 1) {
+        image(noteImages[0], x, 123);
+      } else if (noteTog == 2) {
+        image(noteImages[4], x, 123);
+      }
+      clickY=110;
+    } else if (clickX>= 140 && clickX<=580 && clickY> 145 && clickY <= 155) {
+      if (noteTog == 1) {
+        image(noteImages[0], x, 133);
+      } else if (noteTog == 2) {
+        image(noteImages[4], x, 133);
+      }
+      clickY=120;
+    } else if (clickX>= 140 && clickX<=580 && clickY> 155 && clickY <= 165) {
+      if (noteTog == 1) {
+        image(noteImages[0], x, 143);
+      } else if (noteTog == 2) {
+        image(noteImages[4], x, 143);
+      }
+      clickY=130;
+    } else if (clickX>= 140 && clickX<=580 && clickY> 165 && clickY <= 175) {
+      if (noteTog == 1) {
+        image(noteImages[0], x, 153);
+      } else if (noteTog == 2) {
+        image(noteImages[4], x, 153);
+      }
+      clickY=140;
     }
   }
 
@@ -117,4 +165,3 @@ class Note {
     return round(clickY/10);
   }
 }
-
