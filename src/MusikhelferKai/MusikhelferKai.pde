@@ -16,7 +16,7 @@ Button[] tuneButtons=new Button[12];
 Button[] harmButtons=new Button[12];
 Button[] metro=new Button[3];
 int modeTog, clef;
-String buttonVal, tuneNote, scoreNote;
+String buttonVal, tuneNote, scoreNote, metroVal;
 Boolean play;
 int Y_AXIS = 1;
 int X_AXIS = 2;
@@ -60,6 +60,12 @@ void setup() {
   modeButtons[3]=new Button(60, 570, 100, 100, 25, #7FA3E0, #5E86D8, "4", "Metronome");
   clef=1;
   mouseClicked = false;
+  //+1 BPM Button
+  metroButtons[0] = new Button(362, 350, 100, 100, 25, #7FA3E0, #5E86D8, "0", "+1");
+  //-1 BPM Button
+  metroButtons[1] = new Button(362, 600, 100, 100, 25, #7FA3E0, #5E86D8, "0", "-1");
+  //Play Button
+  metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY");
 }
 
 void mouseReleased() {
@@ -282,23 +288,24 @@ void harmonize() {
   inputScore=new StringList();
   keyConvert.clear();
   if (clef==1) {
-    keyConvert.put(13, "D");
-    keyConvert.put(12, "E");
-    keyConvert.put(11, "F");
-    keyConvert.put(10, "G");
-    keyConvert.put(9, "A");
-    keyConvert.put(8, "B");
-    keyConvert.put(7, "C");
-    keyConvert.put(6, "D");
-    keyConvert.put(5, "E");
-    keyConvert.put(4, "F");
-    keyConvert.put(3, "G");
+    keyConvert.put(14, "D");
+    keyConvert.put(13, "E");
+    keyConvert.put(12, "F");
+    keyConvert.put(11, "G");
+    keyConvert.put(10, "A");
+    keyConvert.put(9, "B");
+    keyConvert.put(8, "C");
+    keyConvert.put(7, "D");
+    keyConvert.put(6, "E");
+    keyConvert.put(5, "F");
+    keyConvert.put(4, "G");
     for (int i=0; i<notes.size()-1; i++) {
       inputScore.append(keyConvert.get(notes.get(i).yVal()));
     }
     println(inputScore);
   }
 }
+
 
 void play() {
 }
