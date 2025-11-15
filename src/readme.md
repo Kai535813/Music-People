@@ -1,4 +1,8 @@
 # Note:
+
+*11/14/25 7:33 PM: Ethan, I just put in my updates (on the main file and the Note class) into a seperate folder under src titled "MusikhelferMo" for you to consolidate. I've added update comments/indicators in the code to make it easier for you to find the changes. :)
+- Mo Spiegel
+
 *11/13/25 9:20 PM: I'm pretty sure that some was Simon's work was accidentally deleted, or rather, replaced by Mo when uploading his files to the MusikHelfer folder, so just as a reminder, remember add all of your code as a seperate folder into the github when updating like Kai did today:*
 ![Kai's File Upload Ex](https://github.com/Kai535813/Musikhelfer/blob/main/images/FileUploadExample.png?raw=true)
 *I will assimilate everything later. - Ethan Tang*
