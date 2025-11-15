@@ -3,7 +3,7 @@ import processing.sound.*;
 import java.util.Map;
 HashMap<Integer, String> keyConvert= new HashMap<Integer, String>();
 ArrayList<Note> notes = new ArrayList<Note>();
-PImage[] noteImages = new PImage[11];
+PImage[] noteImages = new PImage[17];
 //Set Note value (only quarter notes for now)
 int noteTog;
 //Detect whether a mouse has been pressed and released
@@ -76,12 +76,15 @@ void setup() {
   metroButtons[1] = new Button(362, 600, 100, 100, 25, #7FA3E0, #5E86D8, "0", "-1");
   //Play Button
   metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY");
-  harmButtons[0] = new Button(170,30,60,40,25,#7FA3E0, #5E86D8, "1", "");
-  harmButtons[1] = new Button(245,30,60,40,25,#7FA3E0, #5E86D8, "2", "");
-  harmButtons[2] = new Button(320,30,60,40,25,#7FA3E0, #5E86D8, "3", "");
-  harmButtons[3] = new Button(395,30,60,40,25,#7FA3E0, #5E86D8, "4", "");
-  harmButtons[4] = new Button(470,30,60,40,25,#7FA3E0, #5E86D8, "5", "");
-  harmButtons[5] = new Button(545,30,60,40,25,#7FA3E0, #5E86D8, "6", "");
+
+  //Buttons for changing note values: Will change labels later, these are temporary
+  harmButtons[0] = new Button(170,30,60,40,25,#7FA3E0, #5E86D8, "1", "Quart");
+  harmButtons[1] = new Button(245,30,60,40,25,#7FA3E0, #5E86D8, "2", "Eight");
+  harmButtons[2] = new Button(320,30,60,40,25,#7FA3E0, #5E86D8, "3", "Sixt");
+  harmButtons[3] = new Button(395,30,60,40,25,#7FA3E0, #5E86D8, "4", "Half");
+  harmButtons[4] = new Button(470,30,60,40,25,#7FA3E0, #5E86D8, "5", "Whole");
+  harmButtons[5] = new Button(545,30,60,40,25,#7FA3E0, #5E86D8, "6", "Dot");
+
   pitchButtons[0] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Unison");
   pitchButtons[1] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Minor 2nd");
   pitchButtons[2] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Major 2nd");
