@@ -98,16 +98,29 @@ void setup() {
 }
 
 void mouseReleased() {
-  //Mo Spiegel | 3B
   for (int i=0; i<modeButtons.length; i++) {
     if (modeButtons[i].hover(mouseX, mouseY)) {
       modeTog=int(modeButtons[i].val);
       firstSwitch=true;
     }
   }
+  //Mo Spiegel 3B
+  for (int i = 0; i < harmButtons.length; i++) {
+    if (harmButtons[i].hover(mouseX, mouseY) == true) {
+      if (harmButtons[i] == harmButtons[0]) {
+        if (notes.get(notes.size()-1).inputted == false) {
+          notes.get(notes.size()-1).noteTog = 1;
+        }
+      } else if (harmButtons[i] == harmButtons[1]) {
+        if (notes.get(notes.size()-1).inputted == false) {
+          notes.get(notes.size()-1).noteTog = 2;
+        }
+      }
+    }
+  }
   if (modeTog==3&&firstSwitch==true) {
     firstSwitch=false;
-  } else if (modeTog==3&&firstSwitch==false) {
+  } else if (modeTog==3&&firstSwitch==false && mouseX>= 40 && mouseX<=540 && mouseY> 60 && mouseY<180) {
     if (notes.size() == 1 && mouseClicked == false) {
       notes.get(0).mouseClick();
       notes.get(0).inputNote();
@@ -143,7 +156,7 @@ void mouseReleased() {
       notes.get(3).inputNote();
       mouseClicked = false;
       notes.get(3).inputted = true;
-      if (notes.get(3).noteTog == 1 && notes.get(3).x <= 445) {
+      if (notes.get(3).noteTog == 1 && notes.get(3).x <= 400) {
         notes.add(new Note (125, 0, notes.get(3).x + 45*2, 1, false));
       } else if (notes.get(3).noteTog == 2 && notes.get(3).x <= 490) {
         notes.add(new Note (125, 0, notes.get(3).x + 45*1, 2, false));
@@ -153,7 +166,7 @@ void mouseReleased() {
       notes.get(4).inputNote();
       mouseClicked = false;
       notes.get(4).inputted = true;
-      if (notes.get(4).noteTog == 1 && notes.get(4).x <= 445) {
+      if (notes.get(4).noteTog == 1 && notes.get(4).x <= 400) {
         notes.add(new Note (125, 0, notes.get(4).x + 45*2, 1, false));
       } else if (notes.get(4).noteTog == 2 && notes.get(4).x <= 490) {
         notes.add(new Note (125, 0, notes.get(4).x + 45*1, 2, false));
@@ -163,7 +176,7 @@ void mouseReleased() {
       notes.get(5).inputNote();
       mouseClicked = false;
       notes.get(5).inputted = true;
-      if (notes.get(5).noteTog == 1 && notes.get(5).x <= 445) {
+      if (notes.get(5).noteTog == 1 && notes.get(5).x <= 400) {
         notes.add(new Note (125, 0, notes.get(5).x + 45*2, 1, false));
       } else if (notes.get(5).noteTog == 2 && notes.get(5).x <= 490) {
         notes.add(new Note (125, 0, notes.get(5).x + 45*1, 2, false));
@@ -173,7 +186,7 @@ void mouseReleased() {
       notes.get(6).inputNote();
       mouseClicked = false;
       notes.get(6).inputted = true;
-      if (notes.get(6).noteTog == 1 && notes.get(6).x <= 445) {
+      if (notes.get(6).noteTog == 1 && notes.get(6).x <= 400) {
         notes.add(new Note (125, 0, notes.get(6).x + 45*2, 1, false));
       } else if (notes.get(6).noteTog == 2 && notes.get(6).x <= 490) {
         notes.add(new Note (125, 0, notes.get(6).x + 45*1, 2, false));
