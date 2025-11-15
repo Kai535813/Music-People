@@ -11,6 +11,8 @@
 
 ## File Assimilation Record
 
+11/14/25: 8:28 PM: All group member updates assimilated.
+
 11/13/25: 9:42 PM: All of my, Mo's, Simon's and Kai's work has been assimilated into one folder, the note input functions, and the methods tunerMode and harmonize are still unfinished. Also, Aristotle, I saw that you added updates for the metronome, but deleted them later-its fine to upload unfinished work, I can just comment it out when assimilating if said unifinished work prevents the program from running, like what I did with Kai's code today. -Ethan Tang
 
 11/9/25: 5:31 PM: MusikHelfer and Note have both assimilated new updates and have been adjusted for the UI display. -Ethan Tang
