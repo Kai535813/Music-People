@@ -70,12 +70,12 @@ void setup() {
   modeButtons[3]=new Button(60, 570, 100, 100, 25, #7FA3E0, #5E86D8, "4", "Metronome");
   clef=1;
   mouseClicked = false;
-  //+1 BPM Button
+  
+  //Aristotle Stokes
   metroButtons[0] = new Button(362, 350, 100, 100, 25, #7FA3E0, #5E86D8, "0", "+1");
-  //-1 BPM Button
   metroButtons[1] = new Button(362, 600, 100, 100, 25, #7FA3E0, #5E86D8, "0", "-1");
-  //Play Button
   metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY");
+  metroVal = "100";
 
   //Buttons for changing note values: Will change labels later, these are temporary
   harmButtons[0] = new Button(170,30,60,40,25,#7FA3E0, #5E86D8, "1", "Quart");
@@ -336,8 +336,9 @@ void metroMode() {
   rect(362,150,420,225,25);
   
   textAlign(CENTER,CENTER);
-  textSize(42);
-  text("TEST",362,150);
+  fill(0);
+  textSize(150);
+  text(metroVal,362,125);
 }
 
 void harmMode() {
