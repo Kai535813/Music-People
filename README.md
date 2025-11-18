@@ -19,7 +19,7 @@ Musikhelfer is a music software. It includes regular practice functions such as 
 
 **Ethan Tang: Harmonizer page logic**
 
-**Kai Yun Chao: Sound**
+**Kai Yun Chao: Sound files**
 
 **Mo Spiegel: Note Class & Harmonizer page layout**
 
