@@ -333,6 +333,7 @@ void metroMode() {
 }
 
 void harmMode() {
+  //Mo Spiegel | 3B
   rectMode(CORNER);
   strokeWeight(1);
   fill(255);
