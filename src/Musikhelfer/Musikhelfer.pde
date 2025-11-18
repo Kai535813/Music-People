@@ -14,7 +14,7 @@ Button[] modeButtons=new Button[4];
 Button[] tuneButtons=new Button[12];
 Button[] harmButtons=new Button[6];
 Button[] metroButtons=new Button[3];
-Button[] pitchButtons=new Button[13];
+Button[] pitchButtons=new Button[14];
 int modeTog, clef;
 String buttonVal, tuneNote, scoreNote, metroVal;
 Boolean play;
@@ -85,19 +85,20 @@ void setup() {
   harmButtons[4] = new Button(470,30,60,40,25,#7FA3E0, #5E86D8, "5", "Whole");
   harmButtons[5] = new Button(545,30,60,40,25,#7FA3E0, #5E86D8, "6", "Dot");
 
-  pitchButtons[0] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Unison");
-  pitchButtons[1] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Minor 2nd");
-  pitchButtons[2] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Major 2nd");
-  pitchButtons[3] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Minor 3rd");
-  pitchButtons[4] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Major 3rd");
-  pitchButtons[5] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Perfect 4th");
-  pitchButtons[6] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Aug 4th/Tritone");
-  pitchButtons[7] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Perfect 5th");
-  pitchButtons[8] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Minor 6th");
-  pitchButtons[9] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Major 6th");
-  pitchButtons[10] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Minor 7th");
-  pitchButtons[11] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Major 7th");
-  pitchButtons[12] = new Button(120, 270, 100, 20, 25, #7FA3E0, #5E86D8, "9", "Octave");
+  pitchButtons[0] = new Button(200, 70, 100, 40, 25, #7FA3E0, #5E86D8, "31", "Unison");
+  pitchButtons[1] = new Button(320, 140, 100, 40, 25, #7FA3E0, #5E86D8, "31.5", "Minor 2nd");
+  pitchButtons[2] = new Button(200, 140, 100, 40, 25, #7FA3E0, #5E86D8, "32", "Major 2nd");
+  pitchButtons[3] = new Button(320, 210, 100, 40, 25, #7FA3E0, #5E86D8, "32.5", "Minor 3rd");
+  pitchButtons[4] = new Button(200, 210, 100, 40, 25, #7FA3E0, #5E86D8, "33", "Major 3rd");
+  pitchButtons[5] = new Button(200, 280, 100, 40, 25, #7FA3E0, #5E86D8, "34", "Perfect 4th");
+  pitchButtons[6] = new Button(320, 350, 100, 40, 25, #7FA3E0, #5E86D8, "34.5", "Tritone");
+  pitchButtons[7] = new Button(200, 350, 100, 40, 25, #7FA3E0, #5E86D8, "35", "Perfect 5th");
+  pitchButtons[8] = new Button(320, 420, 100, 40, 25, #7FA3E0, #5E86D8, "35.5", "Minor 6th");
+  pitchButtons[9] = new Button(200, 420, 100, 40, 25, #7FA3E0, #5E86D8, "36", "Major 6th");
+  pitchButtons[10] = new Button(320, 490, 100, 40, 25, #7FA3E0, #5E86D8, "36.5", "Minor 7th");
+  pitchButtons[11] = new Button(200, 490, 100, 40, 25, #7FA3E0, #5E86D8, "37", "Major 7th");
+  pitchButtons[12] = new Button(200, 560, 100, 40, 25, #7FA3E0, #5E86D8, "38", "Octave");
+  pitchButtons[13] = new Button(200, 650, 80, 80, 25, #7FA3E0, #5E86D8, "39", "PLAY");
 }
 
 void mouseReleased() {
