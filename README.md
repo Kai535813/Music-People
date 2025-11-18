@@ -1,4 +1,4 @@
-![MusikHelferLogo](https://github.com/Kai535813/Musikhelfer/blob/main/images/MusikHelferLogo.pdf?raw=true)
+![MusikHelferLogo](https://github.com/Kai535813/Musikhelfer/blob/main/images/MusikHelferLogo.pdf)
 
 **Classification: Utility Tool**
 
