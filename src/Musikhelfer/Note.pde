@@ -9,7 +9,7 @@ class Note {
   int noteTog;
 
   //Tracks where the mouse is clicked (where the note is to be inputted)
-  int clickX, clickY;
+  int clickX, clickY,harmY;
 
   //Constructor
   Note(color c1, color c2, int x, int noteTog, boolean inputted) {
@@ -73,66 +73,77 @@ class Note {
       } else if (noteTog == 2) {
         image(noteImages[5], x, 88);
       }
+      harmY=40;
     } else if (clickX>= 140 && clickX<=580 && clickY>= 75 && clickY <= 85) {
       if (noteTog == 1) {
         image(noteImages[1], x, 99);
       } else if (noteTog == 2) {
         image(noteImages[5], x, 98);
       }
+      harmY=50;
     } else if (clickX>= 140 && clickX<=580 && clickY> 85 && clickY <= 95) {
       if (noteTog == 1) {
         image(noteImages[1], x, 109);
       } else if (noteTog == 2) {
         image(noteImages[5], x, 108);
       }
+      harmY=60;
     } else if (clickX>= 140 && clickX<=580 && clickY> 95 && clickY <= 105) {
       if (noteTog == 1) {
         image(noteImages[1], x, 119);
       } else if (noteTog == 2) {
         image(noteImages[5], x, 118);
       }
+      harmY=70;
     } else if (clickX>= 140 && clickX<=580 && clickY> 105 && clickY <= 115) {
       if (noteTog == 1) {
         image(noteImages[1], x, 129);
       } else if (noteTog == 2) {
         image(noteImages[5], x, 128);
       }
+      harmY=80;
     } else if (clickX>= 140 && clickX<=580 && clickY> 115 && clickY <= 125) {
       if (noteTog == 1) {
         image(noteImages[1], x, 139);
       } else if (noteTog == 2) {
         image(noteImages[5], x, 138);
       }
+      harmY=90;
     } else if (clickX>= 140 && clickX<=580 && clickY> 125 && clickY <= 135) {
       if (noteTog == 1) {
         image(noteImages[0], x, 113);
       } else if (noteTog == 2) {
         image(noteImages[4], x, 113);
       }
+      harmY=100;
     } else if (clickX>= 140 && clickX<=580 && clickY> 135 && clickY <= 145) {
       if (noteTog == 1) {
         image(noteImages[0], x, 123);
       } else if (noteTog == 2) {
         image(noteImages[4], x, 123);
       }
+      harmY=110;
     } else if (clickX>= 140 && clickX<=580 && clickY> 145 && clickY <= 155) {
       if (noteTog == 1) {
         image(noteImages[0], x, 133);
       } else if (noteTog == 2) {
         image(noteImages[4], x, 133);
       }
+      harmY=120;
     } else if (clickX>= 140 && clickX<=580 && clickY> 155 && clickY <= 165) {
       if (noteTog == 1) {
         image(noteImages[0], x, 143);
       } else if (noteTog == 2) {
         image(noteImages[4], x, 143);
       }
+      harmY=130;
     } else if (clickX>= 140 && clickX<=580 && clickY> 165 && clickY <= 175) {
       if (noteTog == 1) {
         image(noteImages[0], x, 153);
       } else if (noteTog == 2) {
         image(noteImages[4], x, 153);
       }
+      harmY=140;
     }
   }
 
@@ -143,6 +154,6 @@ class Note {
     }
   }
   int yVal() {
-    return round(clickY/10);
+    return round(harmY/10);
   }
 }
