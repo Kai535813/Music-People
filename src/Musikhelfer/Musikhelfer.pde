@@ -224,24 +224,31 @@ void draw() {
     modeButtons[i].display();
     modeButtons[i].hover(mouseX, mouseY);
   }
- switch(modeTog){
-case 1:
+  switch(modeTog) {
+  case 0:
+    fill(230);
+    textSize(60);
+    text("MusikHelfer", width/2+60, 30);
+    textSize(30);
+    text("Use buttons on the side to navigate and switch functionality", width/2+60, 140, 450, 700);
+    break;
+  case 1:
     pitchMode();
     break;
-case 2:
+  case 2:
     tunerMode();
     for (int i = 0; i<tuneButtons.length; i++) {
       tuneButtons[i].display();
       tuneButtons[i].hover(mouseX, mouseY);
     }
     break;
- case 3:
+  case 3:
     harmMode();
     break;
- case 4:
+  case 4:
     metroMode();
     break;
- }
+  }
 }
 
 void setGradient(int x, int y, float w, float h, color c1, color c2, int axis) {
