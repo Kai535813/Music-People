@@ -1,4 +1,4 @@
-# Musikhelfer
+![MusikHelferLogo](https://github.com/Kai535813/Musikhelfer/blob/main/images/MusikHelferLogo.pde.pdf)
 
 **Classification: Utility Tool**
 
