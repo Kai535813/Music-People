@@ -19,6 +19,8 @@ int Y_AXIS = 1;
 int X_AXIS = 2;
 color c1, c2;
 PFont myFont;
+//Simon Sakata
+int interval, note1, note2;
 
 
 void setup() {
@@ -111,6 +113,15 @@ void setup() {
 }
 
 void mouseReleased() {
+if (pitchButtons[13].hover(mouseX, mouseY)) {
+    note1 = int(random(1,14));
+    note2 = note1 + int(random(0,13));
+    interval = note2-note1;
+    println(interval);
+  }
+  if (pitchButtons[0].hover(mouseX, mouseY)) {
+    
+  }
   for (int i=0; i<modeButtons.length; i++) {
     if (modeButtons[i].hover(mouseX, mouseY)) {
       modeTog=int(modeButtons[i].val);
