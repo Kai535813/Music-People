@@ -3,7 +3,7 @@ import processing.sound.*;
 import java.util.Map;
 HashMap<Integer, String> keyConvert= new HashMap<Integer, String>();
 ArrayList<Note> notes = new ArrayList<Note>();
-PImage[] noteImages = new PImage[20];
+PImage[] noteImages = new PImage[23];
 boolean mouseClicked, firstSwitch;
 StringList inputScore;
 StringList harmonizeRes;
@@ -22,7 +22,7 @@ PFont myFont;
 
 
 void setup() {
-  noteImages[0] = loadImage("Quarter Note.png");
+   noteImages[0] = loadImage("Quarter Note.png");
   noteImages[1] = loadImage("Quarter Note (BOTTOM SIDE).png");
   noteImages[2] = loadImage("Quarter Note (HOVER).png");
   noteImages[3] = loadImage("Quarter Note (HOVER, BOTTOM SIDE).png");
@@ -35,13 +35,16 @@ void setup() {
   noteImages[10] = loadImage("Sixteenth Note (HOVER).png");
   noteImages[11] = loadImage("Sixteenth Note (HOVER, BOTTOM SIDE).png");
   noteImages[12] = loadImage("rHalf Note.png");
-  noteImages[13] = loadImage("Whole Note.jpg");
-  noteImages[14] = loadImage("rFlat.png");
-  noteImages[15] = loadImage("Final Sharp.png");
-  noteImages[16] = loadImage("rBass Clef.png");
-  noteImages[17] = loadImage("rTreble Clef.png");
-  noteImages[18] = loadImage("rQuarter Rest.png");
-  noteImages[19] = loadImage("Final Play.png");
+  noteImages[13] = loadImage("rHalf Note (BOTTOM SIDE).png");
+  noteImages[14] = loadImage("rHalf Note(HOVER).png");
+  noteImages[15] = loadImage("rHalf Note(HOVER, BOTTOM SIDE).png");
+  noteImages[16] = loadImage("Whole Note.jpg");
+  noteImages[17] = loadImage("rFlat.png");
+  noteImages[18] = loadImage("Final Sharp.png");
+  noteImages[19] = loadImage("rBass Clef.png");
+  noteImages[20] = loadImage("rTreble Clef.png");
+  noteImages[21] = loadImage("rQuarter Rest.png");
+  noteImages[22] = loadImage("Final Play.png");
 
   noteImages[0].resize(40, 80);
   noteImages[1].resize(40, 80);
@@ -60,9 +63,12 @@ void setup() {
   noteImages[14].resize(40, 80);
   noteImages[15].resize(40, 80);
   noteImages[16].resize(40, 80);
-  noteImages[17].resize(80, 160);
-  noteImages[19].resize(80, 160);
+  noteImages[17].resize(40, 80);
   noteImages[18].resize(40, 80);
+  noteImages[19].resize(40, 80);
+  noteImages[20].resize(80, 160);
+  noteImages[22].resize(80, 160);
+  noteImages[21].resize(40, 80);
   size(600, 700);
   c1 = color(#5E86D8);
   c2 = color(#6C6C6C);
