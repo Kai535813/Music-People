@@ -3,10 +3,7 @@ import processing.sound.*;
 import java.util.Map;
 HashMap<Integer, String> keyConvert= new HashMap<Integer, String>();
 ArrayList<Note> notes = new ArrayList<Note>();
-PImage[] noteImages = new PImage[17];
-//Set Note value (only quarter notes for now)
-int noteTog;
-//Detect whether a mouse has been pressed and released
+PImage[] noteImages = new PImage[20];
 boolean mouseClicked, firstSwitch;
 StringList inputScore;
 StringList harmonizeRes;
@@ -34,14 +31,17 @@ void setup() {
   noteImages[6] = loadImage("Eight Note (HOVER).png");
   noteImages[7] = loadImage("Eight Note (HOVER, BOTTOM SIDE).png");
   noteImages[8] = loadImage("Sixteenth Note.png");
-  noteImages[9] = loadImage("rHalf Note.png");
-  noteImages[10] = loadImage("Whole Note.jpg");
-  noteImages[11] = loadImage("rFlat.png");
-  noteImages[12] = loadImage("Final Sharp.png");
-  noteImages[13] = loadImage("rBass Clef.png");
-  noteImages[14] = loadImage("rTreble Clef.png");
-  noteImages[15] = loadImage("rQuarter Rest.png");
-  noteImages[16] = loadImage("Final Play.png");
+  noteImages[9] = loadImage("Sixteenth Note (BOTTOM SIDE).png");
+  noteImages[10] = loadImage("Sixteenth Note (HOVER).png");
+  noteImages[11] = loadImage("Sixteenth Note (HOVER, BOTTOM SIDE).png");
+  noteImages[12] = loadImage("rHalf Note.png");
+  noteImages[13] = loadImage("Whole Note.jpg");
+  noteImages[14] = loadImage("rFlat.png");
+  noteImages[15] = loadImage("Final Sharp.png");
+  noteImages[16] = loadImage("rBass Clef.png");
+  noteImages[17] = loadImage("rTreble Clef.png");
+  noteImages[18] = loadImage("rQuarter Rest.png");
+  noteImages[19] = loadImage("Final Play.png");
 
   noteImages[0].resize(40, 80);
   noteImages[1].resize(40, 80);
@@ -57,9 +57,12 @@ void setup() {
   noteImages[11].resize(40, 80);
   noteImages[12].resize(40, 80);
   noteImages[13].resize(40, 80);
-  noteImages[14].resize(80, 160);
-  noteImages[16].resize(80, 160);
+  noteImages[14].resize(40, 80);
   noteImages[15].resize(40, 80);
+  noteImages[16].resize(40, 80);
+  noteImages[17].resize(80, 160);
+  noteImages[19].resize(80, 160);
+  noteImages[18].resize(40, 80);
   size(600, 700);
   c1 = color(#5E86D8);
   c2 = color(#6C6C6C);
@@ -108,7 +111,7 @@ void mouseReleased() {
       firstSwitch=true;
     }
   }
-  //Mo Spiegel 3B
+    //Mo Spiegel 3B
   for (int i = 0; i < harmButtons.length; i++) {
     if (harmButtons[i].hover(mouseX, mouseY) == true) {
       if (harmButtons[i] == harmButtons[0]) {
@@ -119,88 +122,44 @@ void mouseReleased() {
         if (notes.get(notes.size()-1).inputted == false) {
           notes.get(notes.size()-1).noteTog = 2;
         }
+      } else if (harmButtons[i] == harmButtons[2]) {
+        if (notes.get(notes.size()-1).inputted == false) {
+          notes.get(notes.size()-1).noteTog = 3;
+        }
       }
     }
   }
   if (modeTog==3&&firstSwitch==true) {
     firstSwitch=false;
-  } else if (modeTog==3&&firstSwitch==false && mouseX>= 40 && mouseX<=540 && mouseY> 60 && mouseY<180) {
-    if (notes.size() == 1 && mouseClicked == false) {
-      notes.get(0).mouseClick();
-      notes.get(0).inputNote();
-      mouseClicked = false;
-      notes.get(0).inputted = true;
+  } else if (modeTog == 3 && firstSwitch == false && mouseX>= 40 && mouseX<=540 && mouseY>= 60 && mouseY<=180) {
+    notes.get(notes.size()-1).mouseClick();
+    notes.get(notes.size()-1).inputNote();
+    notes.get(notes.size()-1).inputted = true;
+    if ( notes.size()-1 != 0) {
+      if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x+90 <= 490) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 1, false));
+      } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x+90 <= 535) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 2, false));
+      } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x+90 <= 558) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 3, false));
+      } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x+45 <= 535) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 2, false));
+      } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x+45 <= 558) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 3, false));
+      } else if (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x + 23 <= 558) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 23, 3, false));
+      }
+    } else if (notes.size()-1 == 0) {
       if (notes.get(0).noteTog == 1) {
-        notes.add(new Note (125, 0, 220+45*2, 1, false));
+        notes.add(new Note (125, 0, 220+90, 1, false));
       } else if (notes.get(0).noteTog == 2) {
-        notes.add(new Note (125, 0, 220+45*1, 2, false));
-      } //else if (notes.get(0).noteTog == 3, so on)
-    } else if (notes.size() == 2 && mouseClicked == false) {
-      notes.get(1).mouseClick();
-      notes.get(1).inputNote();
-      mouseClicked = false;
-      notes.get(1).inputted = true;
-      if (notes.get(1).noteTog == 1) {
-        notes.add(new Note (125, 0, notes.get(1).x + 45*2, 1, false));
-      } else if (notes.get(1).noteTog == 2) {
-        notes.add(new Note (125, 0, notes.get(1).x + 45*1, 2, false));
-      } //else if (notes.get(0).noteTog == 3, so on)
-    } else if (notes.size() == 3 && mouseClicked == false) {
-      notes.get(2).mouseClick();
-      notes.get(2).inputNote();
-      mouseClicked = false;
-      notes.get(2).inputted = true;
-      if (notes.get(2).noteTog == 1) {
-        notes.add(new Note (125, 0, notes.get(2).x + 45*2, 1, false));
-      } else if (notes.get(2).noteTog == 2) {
-        notes.add(new Note (125, 0, notes.get(2).x + 45*1, 2, false));
-      } //else if (notes.get(0).noteTog == 3, so on)
-    } else if (notes.size() == 4 && mouseClicked == false) {
-      notes.get(3).mouseClick();
-      notes.get(3).inputNote();
-      mouseClicked = false;
-      notes.get(3).inputted = true;
-      if (notes.get(3).noteTog == 1 && notes.get(3).x <= 400) {
-        notes.add(new Note (125, 0, notes.get(3).x + 45*2, 1, false));
-      } else if (notes.get(3).noteTog == 2 && notes.get(3).x <= 490) {
-        notes.add(new Note (125, 0, notes.get(3).x + 45*1, 2, false));
-      } //else if (notes.get(0).noteTog == 3, so on)
-    } else if (notes.size() == 5 && mouseClicked == false) {
-      notes.get(4).mouseClick();
-      notes.get(4).inputNote();
-      mouseClicked = false;
-      notes.get(4).inputted = true;
-      if (notes.get(4).noteTog == 1 && notes.get(4).x <= 400) {
-        notes.add(new Note (125, 0, notes.get(4).x + 45*2, 1, false));
-      } else if (notes.get(4).noteTog == 2 && notes.get(4).x <= 490) {
-        notes.add(new Note (125, 0, notes.get(4).x + 45*1, 2, false));
-      } //else if (notes.get(0).noteTog == 3, so on)
-    } else if (notes.size() == 6 && mouseClicked == false) {
-      notes.get(5).mouseClick();
-      notes.get(5).inputNote();
-      mouseClicked = false;
-      notes.get(5).inputted = true;
-      if (notes.get(5).noteTog == 1 && notes.get(5).x <= 400) {
-        notes.add(new Note (125, 0, notes.get(5).x + 45*2, 1, false));
-      } else if (notes.get(5).noteTog == 2 && notes.get(5).x <= 490) {
-        notes.add(new Note (125, 0, notes.get(5).x + 45*1, 2, false));
-      } //else if (notes.get(0).noteTog == 3, so on)
-    } else if (notes.size() == 7 && mouseClicked == false) {
-      notes.get(6).mouseClick();
-      notes.get(6).inputNote();
-      mouseClicked = false;
-      notes.get(6).inputted = true;
-      if (notes.get(6).noteTog == 1 && notes.get(6).x <= 400) {
-        notes.add(new Note (125, 0, notes.get(6).x + 45*2, 1, false));
-      } else if (notes.get(6).noteTog == 2 && notes.get(6).x <= 490) {
-        notes.add(new Note (125, 0, notes.get(6).x + 45*1, 2, false));
-      } //else if (notes.get(0).noteTog == 3, so on)
-    } else if (notes.size() == 8 && mouseClicked == false) {
-      notes.get(7).mouseClick();
-      notes.get(7).inputNote();
-      mouseClicked = false;
-      notes.get(7).inputted = true;
+        notes.add(new Note (125, 0, 220+45, 2, false));
+      } else if (notes.get(0).noteTog == 3) {
+        notes.add(new Note (125, 0, 220 + 23, 3, false));
+      }
     }
+
+    mouseClicked = false;
   }
 }
 
