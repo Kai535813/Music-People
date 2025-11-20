@@ -356,11 +356,24 @@ void harmonize() {
     keyConvert.put(6, "E");
     keyConvert.put(5, "F");
     keyConvert.put(4, "G");
-    for (int i=0; i<notes.size()-1; i++) {
-      inputScore.append(keyConvert.get(notes.get(i).yVal()));
-    }
-    println(inputScore);
   }
+  if (clef==2) {
+    keyConvert.put(14, "F");
+    keyConvert.put(13, "G");
+    keyConvert.put(12, "A");
+    keyConvert.put(11, "B");
+    keyConvert.put(10, "C");
+    keyConvert.put(9, "D");
+    keyConvert.put(8, "E");
+    keyConvert.put(7, "F");
+    keyConvert.put(6, "G");
+    keyConvert.put(5, "A");
+    keyConvert.put(4, "B");
+  }
+  for (int i=0; i<notes.size(); i++) {
+    inputScore.append(keyConvert.get(notes.get(i).yVal()));
+  }
+  println(inputScore);
 }
 
 void play() {
