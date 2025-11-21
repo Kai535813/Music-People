@@ -189,13 +189,13 @@ void mouseReleased() {
         notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 1, false));
       } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 535) {
         notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 2, false));
-      } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 557) {
+      } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 558) {
         notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 3, false));
       } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x + 45 <= 535) {
         notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 2, false));
-      } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x + 45 <= 557) {
+      } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x + 45 <= 558) {
         notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 3, false));
-      } else if (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x + 22 <= 557) {
+      } else if (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x + 22 <= 558) {
         notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 22, 3, false));
       } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 400) {
         notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 4, false));
@@ -203,7 +203,7 @@ void mouseReleased() {
         notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 1, false));
       } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 535) {
         notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 2, false));
-      } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 557) {
+      } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 558) {
         notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 3, false));
       }
     } else if (notes.size()-1 == 0) {
@@ -437,3 +437,4 @@ void harmonize() {
 
 void play() {
 }
+
