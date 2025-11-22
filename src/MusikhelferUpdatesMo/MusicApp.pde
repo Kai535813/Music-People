@@ -11,7 +11,7 @@ ArrayList<Note> notes = new ArrayList<Note>();
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 //INCREASED PIMAGE ARRAY SIZE
 //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-PImage[] noteImages = new PImage[24];
+PImage[] noteImages = new PImage[33];
 boolean mouseClicked, firstSwitch;
 StringList inputScore;
 StringList harmonizeRes;
@@ -33,8 +33,9 @@ int interval, note1, note2;
 
 void setup() {
   //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  //CALLED WHOLE NOTE AND HALF NOTE IMAGES AND RESIZED THEM (ALREADY UPDATED DATA FOLDER)
+  //CALLED WHOLE NOTE, HALF NOTE, AND REST IMAGES AND RESIZED THEM (ALREADY UPDATED DATA FOLDER)
   //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+  //Notes
   noteImages[0] = loadImage("Quarter Note.png");
   noteImages[1] = loadImage("Quarter Note (BOTTOM SIDE).png");
   noteImages[2] = loadImage("Quarter Note (HOVER).png");
@@ -53,12 +54,26 @@ void setup() {
   noteImages[15] = loadImage("Half Note (HOVER, BOTTOM SIDE).png");
   noteImages[16] = loadImage("Whole Note.png");
   noteImages[17] = loadImage("Whole Note (HOVER).png");
-  noteImages[18] = loadImage("rFlat.png");
-  noteImages[19] = loadImage("Final Sharp.png");
-  noteImages[20] = loadImage("rBass Clef.png");
-  noteImages[21] = loadImage("rTreble Clef.png");
-  noteImages[22] = loadImage("rQuarter Rest.png");
-  noteImages[23] = loadImage("Final Play.png");
+
+  //Rests
+  noteImages[18] = loadImage("Quarter Rest.png");
+  noteImages[19] = loadImage("Quarter Rest (HOVER).png");
+  noteImages[20] = loadImage("Eight Rest.png");
+  noteImages[21] = loadImage("Eight Rest (HOVER).png");
+  noteImages[22] = loadImage("Sixteenth Rest.png");
+  noteImages[23] = loadImage("Sixteenth Rest (HOVER).png");
+  noteImages[24] = loadImage("Half Rest.png");
+  noteImages[25] = loadImage("Half Rest (HOVER).png");
+  noteImages[26] = loadImage("Whole Rest.png");
+  noteImages[27] = loadImage("Whole Rest (HOVER).png");
+
+
+  //Misc
+  noteImages[28] = loadImage("rFlat.png");
+  noteImages[29] = loadImage("Final Sharp.png");
+  noteImages[30] = loadImage("rBass Clef.png");
+  noteImages[31] = loadImage("rTreble Clef.png");
+  noteImages[32] = loadImage("Final Play.png");
 
   noteImages[0].resize(40, 80);
   noteImages[1].resize(40, 80);
@@ -78,16 +93,37 @@ void setup() {
   noteImages[15].resize(40, 80);
   noteImages[16].resize(25, 25);
   noteImages[17].resize(25, 25);
-  noteImages[18].resize(40, 80);
-  noteImages[19].resize(40, 80);
-  noteImages[20].resize(40, 80);
-  noteImages[21].resize(40, 80);
-  noteImages[22].resize(80, 160);
-  noteImages[23].resize(80, 160);
+  
+  //Quarter Rests
+  noteImages[18].resize(30, 70);
+  noteImages[19].resize(30, 70);
+  
+  //Eight Rests
+  noteImages[20].resize(19, 30);
+  noteImages[21].resize(19, 30);
+  
+  //Sixteenth Rests
+  noteImages[22].resize(20, 45);
+  noteImages[23].resize(20, 45);
+  
+  //Half Rests
+  noteImages[24].resize(48, 90);
+  noteImages[25].resize(48, 90);
+  
+  //Whole Rests
+  noteImages[26].resize(48, 90);
+  noteImages[27].resize(48, 90);
+  
+  noteImages[28].resize(40, 80);
+  noteImages[29].resize(40, 80);
+  noteImages[30].resize(40, 80);
+  noteImages[31].resize(40, 80);
+  noteImages[32].resize(80, 160);
 
   size(600, 700);
   c1 = color(#5E86D8);
   c2 = color(#6C6C6C);
+  
   //Simon Sakata | 3B
   modeButtons[0]=new Button(60, 120, 100, 100, 25, #7FA3E0, #5E86D8, "1", "Pitch Ear Training");
   modeButtons[1]=new Button(60, 270, 100, 100, 25, #7FA3E0, #5E86D8, "2", "Tuner");
@@ -167,6 +203,12 @@ void mouseReleased() {
         if (notes.get(notes.size()-1).inputted == false) {
           notes.get(notes.size()-1).noteTog = 5;
         }
+      } else if (harmButtons[i] == harmButtons[5]) {
+        if (notes.get(notes.size()-1).inputted == false && notes.get(notes.size()-1).restMode == false) {
+          notes.get(notes.size()-1).restMode = true;
+        } else if (notes.get(notes.size()-1).inputted == false && notes.get(notes.size()-1).restMode == true) {
+          notes.get(notes.size()-1).restMode = false;
+        }
       }
     }
   }
@@ -175,7 +217,7 @@ void mouseReleased() {
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //ADDED CHECKS FOR NOTE INPUTS
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-  } else if (modeTog == 3 && firstSwitch == false && mouseX>= 40 && mouseX<=540 && mouseY>= 60 && mouseY<=180) {
+  } else if (modeTog == 3 && firstSwitch == false && mouseX>= 40 && mouseX<=580 && mouseY>= 60 && mouseY<=180) {
     if ((notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x <=490) || (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x <=535) || (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x <=557) || (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x <=400) || (notes.get(notes.size()-1).noteTog == 5 && notes.get(notes.size()-1).x == 220)) {
       notes.get(notes.size()-1).mouseClick();
       notes.get(notes.size()-1).inputNote();
@@ -186,35 +228,35 @@ void mouseReleased() {
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     if ( notes.size()-1 != 0) {
       if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 490) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 1, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 1, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 535) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 2, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 2, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 3, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 3, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x + 45 <= 535) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 2, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 2, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x + 45 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 3, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 3, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x + 22 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 22, 3, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 22, 3, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 400) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 4, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 4, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 490) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 1, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 1, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 535) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 2, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 2, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 3, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 3, false, false));
       }
     } else if (notes.size()-1 == 0) {
       if (notes.get(0).noteTog == 1) {
-        notes.add(new Note (125, 0, 220+90, 1, false));
+        notes.add(new Note (125, 0, 220+90, 1, false, false));
       } else if (notes.get(0).noteTog == 2) {
-        notes.add(new Note (125, 0, 220+45, 2, false));
+        notes.add(new Note (125, 0, 220+45, 2, false, false));
       } else if (notes.get(0).noteTog == 3) {
-        notes.add(new Note (125, 0, 220 + 22, 3, false));
+        notes.add(new Note (125, 0, 220 + 22, 3, false, false));
       } else if (notes.get(0).noteTog == 4) {
-        notes.add(new Note(125, 0, 220 +180, 4, false));
+        notes.add(new Note(125, 0, 220 +180, 4, false, false));
       }
     }
 
@@ -373,7 +415,10 @@ void harmMode() {
   line(140, 140, 580, 140);
   line(140, 160, 580, 160);
   if (notes.size() == 0) {
-    notes.add(new Note(125, 0, 220, 2, false));
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    //ADDED RESTMODE CONSTRUCTOR PARAMATER TO FIRST NOTE
+    //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    notes.add(new Note(125, 0, 220, 2, false, false));
   }
   for (int i = 0; i < notes.size(); i++) {
     notes.get(i).hover();
@@ -437,4 +482,3 @@ void harmonize() {
 
 void play() {
 }
-
