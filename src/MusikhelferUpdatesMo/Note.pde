@@ -6,13 +6,14 @@ class Note {
   color c1, c2;
   int x;
   boolean inputted;
+  boolean restMode;
   int noteTog;
 
   //Tracks where the mouse is clicked (where the note is to be inputted)
   int clickX, clickY;
 
   //Constructor
-  Note(color c1, color c2, int x, int noteTog, boolean inputted) {
+  Note(color c1, color c2, int x, int noteTog, boolean inputted, boolean restMode) {
 
     //Hover color
     this.c1 = c1;
@@ -25,6 +26,7 @@ class Note {
 
     this.noteTog = noteTog;
     this.inputted = inputted;
+    this.restMode = restMode;
   }
 
   //Member Methods
@@ -35,36 +37,48 @@ class Note {
     fill(c1);
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    //ADDED WHOLE AND HALF NOTE HOVERING
+    //ADDED WHOLE NOTE, HALF NOTE, AND REST HOVERING
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     if (inputted == false) {
       imageMode(CENTER);
       for (int i = 65; i<175; i = i + 10) {
         if (mouseX>= 140 && mouseX<=580 && mouseY> i && mouseY< i+10 && mouseY<125) {
-          if (noteTog == 1) {
+          if (noteTog == 1 && restMode == false) {
             image(noteImages[3], x, i+24);
-          } else if (noteTog == 2) {
+          } else if (noteTog == 2 && restMode == false) {
             image(noteImages[7], x, i+23);
-          } else if (noteTog == 3) {
+          } else if (noteTog == 3 && restMode == false) {
             image(noteImages[11], x, i+23);
-          } else if (noteTog == 4) {
+          } else if (noteTog == 4 && restMode == false) {
             image(noteImages[15], x, i+23);
-          } else if (noteTog ==5) {
+          } else if (noteTog ==5 && restMode == false) {
             image(noteImages[17], x, i+5);
-          }
+          } 
         } else if (mouseX>= 140 && mouseX<=580 && mouseY> i && mouseY < i+10 && mouseY >125) {
-          if (noteTog == 1) {
+          if (noteTog == 1 && restMode == false) {
             image(noteImages[2], x, i-12);
-          } else if (noteTog == 2) {
+          } else if (noteTog == 2 && restMode == false) {
             image(noteImages[6], x, i-12);
-          } else if (noteTog == 3) {
+          } else if (noteTog == 3 && restMode == false) {
             image(noteImages[10], x, i-12);
-          } else if (noteTog == 4) {
+          } else if (noteTog == 4 && restMode == false) {
             image(noteImages[14], x, i-12);
-          } else if (noteTog == 5) {
+          } else if (noteTog == 5 && restMode == false) {
             image(noteImages[17], x, i+5);
           }
         }
+      }
+      //Rests
+      if (noteTog == 1 && restMode == true) {
+        image(noteImages[19], x, 123);
+      } else if (noteTog == 2 && restMode == true) {
+        image(noteImages[21], x, 120);
+      } else if (noteTog == 3 && restMode == true) {
+        image(noteImages[23], x, 130);
+      } else if (noteTog == 4 && restMode == true) {
+        image(noteImages[25], x, 130);
+      } else if (noteTog == 5 && restMode == true) {
+        image(noteImages[27], x, 138);
       }
     }
   }
@@ -82,9 +96,9 @@ class Note {
     stroke(c2);
 
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    //ADDED IMAGES FOR WHOLE AND HALF NOTE INPUTS
+    //ADDED IMAGES FOR WHOLE AND HALF NOTE, REST INPUTS
     //-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    if (clickX>= 140 && clickX<=580 && clickY> 65 && clickY< 75) {
+    if (clickX>= 140 && clickX<=580 && clickY> 65 && clickY< 75 && restMode == false) {
       if (noteTog == 1) {
         image(noteImages[1], x, 89);
       } else if (noteTog == 2) {
@@ -95,8 +109,8 @@ class Note {
         image(noteImages[13], x, 88);
       } else if (noteTog == 5) {
         image(noteImages[16], x, 70);
-      }
-    } else if (clickX>= 140 && clickX<=580 && clickY>= 75 && clickY <= 85) {
+      } 
+    } else if (clickX>= 140 && clickX<=580 && clickY>= 75 && clickY <= 85 && restMode == false) {
       if (noteTog == 1) {
         image(noteImages[1], x, 99);
       } else if (noteTog == 2) {
@@ -108,7 +122,7 @@ class Note {
       } else if (noteTog == 5) {
         image(noteImages[16], x, 80);
       }
-    } else if (clickX>= 140 && clickX<=580 && clickY> 85 && clickY <= 95) {
+    } else if (clickX>= 140 && clickX<=580 && clickY> 85 && clickY <= 95 && restMode == false) {
       if (noteTog == 1) {
         image(noteImages[1], x, 109);
       } else if (noteTog == 2) {
@@ -120,7 +134,7 @@ class Note {
       } else if (noteTog == 5) {
         image(noteImages[16], x, 90);
       }
-    } else if (clickX>= 140 && clickX<=580 && clickY> 95 && clickY <= 105) {
+    } else if (clickX>= 140 && clickX<=580 && clickY> 95 && clickY <= 105 && restMode == false) {
       if (noteTog == 1) {
         image(noteImages[1], x, 119);
       } else if (noteTog == 2) {
@@ -132,7 +146,7 @@ class Note {
       } else if (noteTog == 5) {
         image(noteImages[16], x, 100);
       }
-    } else if (clickX>= 140 && clickX<=580 && clickY> 105 && clickY <= 115) {
+    } else if (clickX>= 140 && clickX<=580 && clickY> 105 && clickY <= 115 && restMode == false) {
       if (noteTog == 1) {
         image(noteImages[1], x, 129);
       } else if (noteTog == 2) {
@@ -144,7 +158,7 @@ class Note {
       } else if (noteTog == 5) {
         image(noteImages[16], x, 110);
       }
-    } else if (clickX>= 140 && clickX<=580 && clickY> 115 && clickY <= 125) {
+    } else if (clickX>= 140 && clickX<=580 && clickY> 115 && clickY <= 125 && restMode == false) {
       if (noteTog == 1) {
         image(noteImages[1], x, 139);
       } else if (noteTog == 2) {
@@ -156,7 +170,7 @@ class Note {
       } else if (noteTog == 5) {
         image(noteImages[16], x, 120);
       }
-    } else if (clickX>= 140 && clickX<=580 && clickY> 125 && clickY <= 135) {
+    } else if (clickX>= 140 && clickX<=580 && clickY> 125 && clickY <= 135 && restMode == false) {
       if (noteTog == 1) {
         image(noteImages[0], x, 113);
       } else if (noteTog == 2) {
@@ -168,7 +182,7 @@ class Note {
       } else if (noteTog == 5) {
         image(noteImages[16], x, 130);
       }
-    } else if (clickX>= 140 && clickX<=580 && clickY> 135 && clickY <= 145) {
+    } else if (clickX>= 140 && clickX<=580 && clickY> 135 && clickY <= 145 && restMode == false) {
       if (noteTog == 1) {
         image(noteImages[0], x, 123);
       } else if (noteTog == 2) {
@@ -180,7 +194,7 @@ class Note {
       } else if (noteTog == 5) {
         image(noteImages[16], x, 140);
       }
-    } else if (clickX>= 140 && clickX<=580 && clickY> 145 && clickY <= 155) {
+    } else if (clickX>= 140 && clickX<=580 && clickY> 145 && clickY <= 155 && restMode == false) {
       if (noteTog == 1) {
         image(noteImages[0], x, 133);
       } else if (noteTog == 2) {
@@ -192,7 +206,7 @@ class Note {
       } else if (noteTog == 5) {
         image(noteImages[16], x, 150);
       }
-    } else if (clickX>= 140 && clickX<=580 && clickY> 155 && clickY <= 165) {
+    } else if (clickX>= 140 && clickX<=580 && clickY> 155 && clickY <= 165 && restMode == false) {
       if (noteTog == 1) {
         image(noteImages[0], x, 143);
       } else if (noteTog == 2) {
@@ -204,7 +218,7 @@ class Note {
       } else if (noteTog == 5) {
         image(noteImages[16], x, 160);
       }
-    } else if (clickX>= 140 && clickX<=580 && clickY> 165 && clickY <= 175) {
+    } else if (clickX>= 140 && clickX<=580 && clickY> 165 && clickY <= 175 && restMode == false) {
       if (noteTog == 1) {
         image(noteImages[0], x, 153);
       } else if (noteTog == 2) {
@@ -215,6 +229,18 @@ class Note {
         image(noteImages[12], x, 153);
       } else if (noteTog == 5) {
         image(noteImages[16], x, 170);
+      }
+    } else if (clickX >= 140 && clickX <= 580 && restMode == true) {
+      if (noteTog == 1) {
+        image(noteImages[18], x, 123);
+      } else if (noteTog == 2) {
+        image(noteImages[20], x, 120);
+      } else if (noteTog == 3) {
+        image(noteImages[22], x, 130);
+      } else if (noteTog == 4) {
+        image(noteImages[24], x, 130);
+      } else if (noteTog == 5) {
+        image(noteImages[26], x, 138);
       }
     }
   }
