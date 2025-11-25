@@ -286,6 +286,7 @@ void mousePressed() {
       //}
     }
   }
+}
 
 void draw() {
   background(75);
