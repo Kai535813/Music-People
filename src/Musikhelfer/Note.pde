@@ -7,13 +7,15 @@ class Note {
   int x;
   boolean inputted;
   boolean restMode;
+  boolean flat;
+  boolean sharp;
   int noteTog;
 
   //Tracks where the mouse is clicked (where the note is to be inputted)
   int clickX, clickY,harmY;
 
   //Constructor
-  Note(color c1, color c2, int x, int noteTog, boolean inputted, boolean restMode) {
+  Note(color c1, color c2, int x, int noteTog, boolean inputted, boolean restMode, boolean flat, boolean sharp) {
 
     //Hover color
     this.c1 = c1;
@@ -27,6 +29,8 @@ class Note {
     this.noteTog = noteTog;
     this.inputted = inputted;
     this.restMode = restMode;
+    this.flat = flat;
+    this.sharp = sharp;
   }
 
   //Member Methods
