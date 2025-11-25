@@ -284,7 +284,9 @@ void mouseReleased() {
     }
   }
 
-    mouseClicked = false;
+      mouseClicked = false;
+    }
+  }
 }
 
 void mousePressed() {
