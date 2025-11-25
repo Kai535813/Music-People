@@ -257,6 +257,6 @@ class Note {
     }
   }
   int yVal() {
-    return round(clickY/10);
+    return round(harmY/10);
   }
 }
