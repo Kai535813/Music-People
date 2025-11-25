@@ -25,7 +25,7 @@ int interval, note1, note2;
 
 
 void setup() {
-  pitch = new SoundFile(this, "C5.mp3");
+  //pitch = new SoundFile(this, "C5.mp3");
   pitchC = new SoundFile(this, "C5.mp3");
   //pitchA = new SoundFile(this, "A5.mp3");
   //file = new SoundFile(this, "sample.mp3");
@@ -269,9 +269,10 @@ void mousePressed() {
 
   //Kai Yun Chao | 3B
   for (int i = 0; i<tuneButtons.length; i++) {
-    if (tuneButtons[i].over&&tuneButtons[i].val.equals("C/B#")) {
-      pitchC.play();
-      println("test");
+    if (tuneButtons[i].over) {
+      play(tuneButtons[i].disVal); //<>//
+      println(tuneButtons[i].disVal);
+
       //if (pitchC.isPlaying()) {
       //  pitchC.stop();
       //} else {
@@ -481,5 +482,16 @@ void harmonize() {
   println(inputScore);
 }
 
-void play() {
+void play(String noteVal) {
+  if (noteVal.equals("C/B#")) {
+    pitchC.play(); //<>//
+    println("playing");
+    for (int i=0; i<120; i++) {
+      if (i>=120) {
+        //pitchC.stop();
+        println("stop");
+        i=121;
+      }
+    }
+  }
 }
