@@ -1,3 +1,4 @@
+
 //Ethan Tang | 3B | 11/4/25
 import processing.sound.*;
 SoundFile pitch, pitchC;
@@ -10,15 +11,12 @@ StringList inputScore;
 StringList harmonizeRes;
 Button[] modeButtons=new Button[4];
 Button[] tuneButtons=new Button[12];
-Button[] harmButtons=new Button[6];
+Button[] harmButtons=new Button[9];
 Button[] metroButtons=new Button[3];
 Button[] pitchButtons=new Button[14];
 int modeTog, clef;
 String buttonVal, tuneNote, scoreNote, metroVal;
 Boolean play;
-Boolean metroPlaying = false;
-int lastTick = 0;
-Boolean flashOn = false;
 int Y_AXIS = 1;
 int X_AXIS = 2;
 color c1, c2;
@@ -28,7 +26,7 @@ int interval, note1, note2;
 
 
 void setup() {
-  //pitch = new SoundFile(this, "C5.mp3");
+  pitch = new SoundFile(this, "C5.mp3");
   pitchC = new SoundFile(this, "C5.mp3");
   //pitchA = new SoundFile(this, "A5.mp3");
   //file = new SoundFile(this, "sample.mp3");
@@ -37,7 +35,7 @@ void setup() {
   //file = new SoundFile(this, "sample.mp3");
   //file = new SoundFile(this, "sample.mp3");
   //file = new SoundFile(this, "sample.mp3");
- //Notes
+  //Notes
   noteImages[0] = loadImage("Quarter Note.png");
   noteImages[1] = loadImage("Quarter Note (BOTTOM SIDE).png");
   noteImages[2] = loadImage("Quarter Note (HOVER).png");
@@ -71,10 +69,10 @@ void setup() {
 
 
   //Misc
-  noteImages[28] = loadImage("rFlat.png");
-  noteImages[29] = loadImage("Final Sharp.png");
-  noteImages[30] = loadImage("rBass Clef.png");
-  noteImages[31] = loadImage("rTreble Clef.png");
+  noteImages[28] = loadImage("Flat.png");
+  noteImages[29] = loadImage("Flat (HOVER).png");
+  noteImages[30] = loadImage("Sharp.png");
+  noteImages[31] = loadImage("Sharp (HOVER).png");
   noteImages[32] = loadImage("Final Play.png");
 
   noteImages[0].resize(40, 80);
@@ -95,27 +93,27 @@ void setup() {
   noteImages[15].resize(40, 80);
   noteImages[16].resize(25, 25);
   noteImages[17].resize(25, 25);
-  
+
   //Quarter Rests
   noteImages[18].resize(30, 70);
   noteImages[19].resize(30, 70);
-  
+
   //Eight Rests
   noteImages[20].resize(19, 30);
   noteImages[21].resize(19, 30);
-  
+
   //Sixteenth Rests
   noteImages[22].resize(20, 45);
   noteImages[23].resize(20, 45);
-  
+
   //Half Rests
   noteImages[24].resize(48, 90);
   noteImages[25].resize(48, 90);
-  
+
   //Whole Rests
   noteImages[26].resize(48, 90);
   noteImages[27].resize(48, 90);
-  
+
   noteImages[28].resize(40, 80);
   noteImages[29].resize(40, 80);
   noteImages[30].resize(40, 80);
@@ -131,20 +129,23 @@ void setup() {
   modeButtons[3]=new Button(60, 570, 100, 100, 25, #7FA3E0, #5E86D8, "4", "Metronome");
   clef=1;
   mouseClicked = false;
-  
+
   //Aristotle Stokes
   metroButtons[0] = new Button(362, 350, 100, 100, 25, #7FA3E0, #5E86D8, "0", "+1");
   metroButtons[1] = new Button(362, 600, 100, 100, 25, #7FA3E0, #5E86D8, "0", "-1");
-  metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY/STOP");
+  metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY");
   metroVal = "100";
 
   //Buttons for changing note values: Will change labels later, these are temporary
-  harmButtons[0] = new Button(170,30,60,40,25,#7FA3E0, #5E86D8, "1", "Quart");
-  harmButtons[1] = new Button(245,30,60,40,25,#7FA3E0, #5E86D8, "2", "Eight");
-  harmButtons[2] = new Button(320,30,60,40,25,#7FA3E0, #5E86D8, "3", "Sixt");
-  harmButtons[3] = new Button(395,30,60,40,25,#7FA3E0, #5E86D8, "4", "Half");
-  harmButtons[4] = new Button(470,30,60,40,25,#7FA3E0, #5E86D8, "5", "Whole");
-  harmButtons[5] = new Button(545,30,60,40,25,#7FA3E0, #5E86D8, "6", "Rest");
+  harmButtons[0] = new Button(170, 30, 60, 40, 25, #7FA3E0, #5E86D8, "1", "Quart");
+  harmButtons[1] = new Button(245, 30, 60, 40, 25, #7FA3E0, #5E86D8, "2", "Eight");
+  harmButtons[2] = new Button(320, 30, 60, 40, 25, #7FA3E0, #5E86D8, "3", "Sixt");
+  harmButtons[3] = new Button(395, 30, 60, 40, 25, #7FA3E0, #5E86D8, "4", "Half");
+  harmButtons[4] = new Button(470, 30, 60, 40, 25, #7FA3E0, #5E86D8, "5", "Whole");
+  harmButtons[5] = new Button(545, 30, 60, 40, 25, #7FA3E0, #5E86D8, "6", "Rest");
+  harmButtons[6] = new Button(358, 220, 135, 40, 25, #7FA3E0, #5E86D8, "7", "Clear" );
+  harmButtons[7] = new Button(245, 220, 60, 40, 25, #7FA3E0, #5E86D8, "8", "#");
+  harmButtons[8] = new Button(470, 220, 60, 40, 25, #7FA3E0, #5E86D8, "9", "b");
 
   pitchButtons[0] = new Button(200, 70, 100, 40, 25, #7FA3E0, #5E86D8, "31", "Unison");
   pitchButtons[1] = new Button(320, 140, 100, 40, 25, #7FA3E0, #5E86D8, "31.5", "Minor 2nd");
@@ -219,73 +220,68 @@ void mouseReleased() {
         } else if (notes.get(notes.size()-1).inputted == false && notes.get(notes.size()-1).restMode == true) {
           notes.get(notes.size()-1).restMode = false;
         }
+      } else if (harmButtons[i] == harmButtons[6]) {
+        notes.clear();
+      } else if (harmButtons[i] == harmButtons[7]) {
+        if (notes.get(notes.size()-1).sharp == false) {
+          notes.get(notes.size()-1).flat = false;
+          notes.get(notes.size()-1).sharp = true;
+        } else if (notes.get(notes.size()-1).sharp == true) {
+          notes.get(notes.size()-1).sharp = false;
+        }  
+      } else if (harmButtons[i] == harmButtons[8]) {
+        if (notes.get(notes.size()-1).flat == false) {
+          notes.get(notes.size()-1).sharp = false;
+          notes.get(notes.size()-1).flat = true;
+        } else if (notes.get(notes.size()-1).flat == true) {
+          notes.get(notes.size()-1).flat = false;
+        }
       }
     }
   }
   if (modeTog==3&&firstSwitch==true) {
     firstSwitch=false;
   } else if (modeTog == 3 && firstSwitch == false && mouseX>= 40 && mouseX<=580 && mouseY>= 60 && mouseY<=180) {
-      if ((notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x <=490) || (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x <=535) || (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x <=558) || (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x <=400) || (notes.get(notes.size()-1).noteTog == 5 && notes.get(notes.size()-1).x == 220)) {
+    if ((notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x <=490) || (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x <=535) || (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x <=558) || (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x <=400) || (notes.get(notes.size()-1).noteTog == 5 && notes.get(notes.size()-1).x == 220)) {
       notes.get(notes.size()-1).mouseClick();
       notes.get(notes.size()-1).inputNote();
       notes.get(notes.size()-1).inputted = true;
     }
     if ( notes.size()-1 != 0) {
       if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 490) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 1, false, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 1, false, false, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 535) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 2, false, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 2, false, false, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 3, false, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 3, false, false, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x + 45 <= 535) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 2, false, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 2, false, false, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x + 45 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 3, false, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 3, false, false, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x + 22 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 22, 3, false, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 22, 3, false, false, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 400) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 4, false, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 4, false, false, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 490) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 1, false, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 1, false, false, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 535) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 2, false, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 2, false, false, false, false));
       } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 3, false, false));
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 3, false, false, false, false));
       }
     } else if (notes.size()-1 == 0) {
       if (notes.get(0).noteTog == 1) {
-        notes.add(new Note (125, 0, 220+90, 1, false, false));
+        notes.add(new Note (125, 0, 220+90, 1, false, false, false, false));
       } else if (notes.get(0).noteTog == 2) {
-        notes.add(new Note (125, 0, 220+45, 2, false, false));
+        notes.add(new Note (125, 0, 220+45, 2, false, false, false, false));
       } else if (notes.get(0).noteTog == 3) {
-        notes.add(new Note (125, 0, 220 + 22, 3, false, false));
+        notes.add(new Note (125, 0, 220 + 22, 3, false, false, false, false));
       } else if (notes.get(0).noteTog == 4) {
-        notes.add(new Note(125, 0, 220 +180, 4, false, false));
+        notes.add(new Note(125, 0, 220 +180, 4, false, false, false, false));
       }
-//Metronome Buttons
-  if (modeTog == 4) {
-    //+1 BPM
-    if (metroButtons[0].hover(mouseX, mouseY)) {
-      int v = int(metroVal);
-      v++;
-      metroVal = str(v);
     }
-    //-1 BPM
-    if (metroButtons[1].hover(mouseX, mouseY)) {
-      int v = int(metroVal);
-      v--;
-      metroVal=str(v);
-    }
-    //PLAY
-    if (metroButtons[2].hover(mouseX, mouseY)) {
-      metroPlaying = !metroPlaying;
-      flashOn = false;
-      lastTick = millis();
-    }
-  }
 
-      mouseClicked = false;
-    }
+    mouseClicked = false;
   }
 }
 
@@ -293,10 +289,9 @@ void mousePressed() {
 
   //Kai Yun Chao | 3B
   for (int i = 0; i<tuneButtons.length; i++) {
-    if (tuneButtons[i].over) {
-      play(tuneButtons[i].disVal); //<>//
-      println(tuneButtons[i].disVal);
-
+    if (tuneButtons[i].over&&tuneButtons[i].val.equals("C/B#")) {
+      pitchC.play();
+      println("test");
       //if (pitchC.isPlaying()) {
       //  pitchC.stop();
       //} else {
@@ -405,44 +400,39 @@ void tunerMode() {
 
 void pitchMode() {
   for (int i=0; i<pitchButtons.length; i++) {
-  pitchButtons[i].display();
-  pitchButtons[i].hover(mouseX,mouseY);
+    pitchButtons[i].display();
+    pitchButtons[i].hover(mouseX, mouseY);
   }
 }
 
 void metroMode() {
-
- //Button Functionality
+  //+1 BPM Button
+  metroButtons[0] = new Button(362, 350, 100, 100, 25, #7FA3E0, #5E86D8, "0", "+1");
+  metroButtons[0].display();
+  metroButtons[0].hover(mouseX, mouseY);
+  //-1 BPM Button
+  metroButtons[1] = new Button(362, 600, 100, 100, 25, #7FA3E0, #5E86D8, "0", "-1");
+  metroButtons[1].display();
+  metroButtons[1].hover(mouseX, mouseY);
+  //Play Button
+  metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY");
+  metroButtons[2].display();
+  metroButtons[2].hover(mouseX, mouseY);
+  //Hover For Buttons
   for (int i = 0; i < metroButtons.length; i++) {
     metroButtons[i].hover(mouseX, mouseY);
     metroButtons[i].display();
   }
-  
+
   //Metronome Display
   rectMode(CENTER);
-
-  // Flash white on beat
-  if (flashOn) fill(240,240,255);
-  else fill(200);
-
+  fill(200);
   rect(362, 150, 420, 225, 25);
 
   textAlign(CENTER, CENTER);
   fill(0);
   textSize(150);
   text(metroVal, 362, 125);
-
-
-  if (metroPlaying) {
-    float interval = 60000 / int(metroVal);
-    if (millis() - lastTick >= interval) {
-      flashOn = true;
-      lastTick = millis();
-    }
-    if (millis() - lastTick> 100) {
-      flashOn = false;
-    }
-  }
 }
 
 void harmMode() {
@@ -459,13 +449,13 @@ void harmMode() {
   line(140, 140, 580, 140);
   line(140, 160, 580, 160);
   if (notes.size() == 0) {
-      notes.add(new Note(125, 0, 220, 2, false, false));
+    notes.add(new Note(125, 0, 220, 2, false, false, false, false));
   }
   for (int i = 0; i < notes.size(); i++) {
     notes.get(i).hover();
     notes.get(i).inputNote();
   }
- for (int i = 0; i < harmButtons.length; i++) {
+  for (int i = 0; i < harmButtons.length; i++) {
     harmButtons[i].display();
     harmButtons[i].hover(mouseX, mouseY);
   }
@@ -503,7 +493,7 @@ void harmonize() {
     keyConvert.put(6, "G");
     keyConvert.put(5, "A");
     keyConvert.put(4, "B");
-    keyConvert.put(0,"rest");
+    keyConvert.put(0, "rest");
   }
   for (int i=0; i<notes.size(); i++) {
     inputScore.append(keyConvert.get(notes.get(i).yVal()));
@@ -511,16 +501,5 @@ void harmonize() {
   println(inputScore);
 }
 
-void play(String noteVal) {
-  if (noteVal.equals("C/B#")) {
-    pitchC.play(); //<>//
-    println("playing");
-    for (int i=0; i<120; i++) {
-      if (i>=120) {
-        //pitchC.stop();
-        println("stop");
-        i=121;
-      }
-    }
-  }
+void play() {
 }
