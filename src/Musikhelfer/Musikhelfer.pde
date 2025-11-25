@@ -222,7 +222,7 @@ void mouseReleased() {
   if (modeTog==3&&firstSwitch==true) {
     firstSwitch=false;
   } else if (modeTog == 3 && firstSwitch == false && mouseX>= 40 && mouseX<=580 && mouseY>= 60 && mouseY<=180) {
-    if ((notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x <=490) || (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x <=535) || (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x <=557) || (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x <=400) || (notes.get(notes.size()-1).noteTog == 5 && notes.get(notes.size()-1).x == 220)) {
+      if ((notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x <=490) || (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x <=535) || (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x <=558) || (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x <=400) || (notes.get(notes.size()-1).noteTog == 5 && notes.get(notes.size()-1).x == 220)) {
       notes.get(notes.size()-1).mouseClick();
       notes.get(notes.size()-1).inputNote();
       notes.get(notes.size()-1).inputted = true;
