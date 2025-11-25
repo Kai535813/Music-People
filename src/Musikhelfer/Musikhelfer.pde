@@ -262,7 +262,6 @@ void mouseReleased() {
       } else if (notes.get(0).noteTog == 4) {
         notes.add(new Note(125, 0, 220 +180, 4, false, false));
       }
-    }
 //Metronome Buttons
   if (modeTog == 4) {
     //+1 BPM
@@ -286,7 +285,6 @@ void mouseReleased() {
   }
 
     mouseClicked = false;
-  }
 }
 
 void mousePressed() {
