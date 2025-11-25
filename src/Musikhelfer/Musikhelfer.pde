@@ -1,9 +1,10 @@
 //Ethan Tang | 3B | 11/4/25
 import processing.sound.*;
+SoundFile pitch, pitchC;
 import java.util.Map;
 HashMap<Integer, String> keyConvert= new HashMap<Integer, String>();
 ArrayList<Note> notes = new ArrayList<Note>();
-PImage[] noteImages = new PImage[23];
+PImage[] noteImages = new PImage[33];
 boolean mouseClicked, firstSwitch;
 StringList inputScore;
 StringList harmonizeRes;
@@ -24,7 +25,17 @@ int interval, note1, note2;
 
 
 void setup() {
-   noteImages[0] = loadImage("Quarter Note.png");
+  pitch = new SoundFile(this, "C5.mp3");
+  pitchC = new SoundFile(this, "C5.mp3");
+  //pitchA = new SoundFile(this, "A5.mp3");
+  //file = new SoundFile(this, "sample.mp3");
+  //file = new SoundFile(this, "sample.mp3");
+  //file = new SoundFile(this, "sample.mp3");
+  //file = new SoundFile(this, "sample.mp3");
+  //file = new SoundFile(this, "sample.mp3");
+  //file = new SoundFile(this, "sample.mp3");
+ //Notes
+  noteImages[0] = loadImage("Quarter Note.png");
   noteImages[1] = loadImage("Quarter Note (BOTTOM SIDE).png");
   noteImages[2] = loadImage("Quarter Note (HOVER).png");
   noteImages[3] = loadImage("Quarter Note (HOVER, BOTTOM SIDE).png");
@@ -36,17 +47,32 @@ void setup() {
   noteImages[9] = loadImage("Sixteenth Note (BOTTOM SIDE).png");
   noteImages[10] = loadImage("Sixteenth Note (HOVER).png");
   noteImages[11] = loadImage("Sixteenth Note (HOVER, BOTTOM SIDE).png");
-  noteImages[12] = loadImage("rHalf Note.png");
-  noteImages[13] = loadImage("rHalf Note (BOTTOM SIDE).png");
-  noteImages[14] = loadImage("rHalf Note(HOVER).png");
-  noteImages[15] = loadImage("rHalf Note(HOVER, BOTTOM SIDE).png");
-  noteImages[16] = loadImage("Whole Note.jpg");
-  noteImages[17] = loadImage("rFlat.png");
-  noteImages[18] = loadImage("Final Sharp.png");
-  noteImages[19] = loadImage("rBass Clef.png");
-  noteImages[20] = loadImage("rTreble Clef.png");
-  noteImages[21] = loadImage("rQuarter Rest.png");
-  noteImages[22] = loadImage("Final Play.png");
+  noteImages[12] = loadImage("Half Note.png");
+  noteImages[13] = loadImage("Half Note (BOTTOM SIDE).png");
+  noteImages[14] = loadImage("Half Note (HOVER).png");
+  noteImages[15] = loadImage("Half Note (HOVER, BOTTOM SIDE).png");
+  noteImages[16] = loadImage("Whole Note.png");
+  noteImages[17] = loadImage("Whole Note (HOVER).png");
+
+  //Rests
+  noteImages[18] = loadImage("Quarter Rest.png");
+  noteImages[19] = loadImage("Quarter Rest (HOVER).png");
+  noteImages[20] = loadImage("Eight Rest.png");
+  noteImages[21] = loadImage("Eight Rest (HOVER).png");
+  noteImages[22] = loadImage("Sixteenth Rest.png");
+  noteImages[23] = loadImage("Sixteenth Rest (HOVER).png");
+  noteImages[24] = loadImage("Half Rest.png");
+  noteImages[25] = loadImage("Half Rest (HOVER).png");
+  noteImages[26] = loadImage("Whole Rest.png");
+  noteImages[27] = loadImage("Whole Rest (HOVER).png");
+
+
+  //Misc
+  noteImages[28] = loadImage("rFlat.png");
+  noteImages[29] = loadImage("Final Sharp.png");
+  noteImages[30] = loadImage("rBass Clef.png");
+  noteImages[31] = loadImage("rTreble Clef.png");
+  noteImages[32] = loadImage("Final Play.png");
 
   noteImages[0].resize(40, 80);
   noteImages[1].resize(40, 80);
@@ -64,13 +90,34 @@ void setup() {
   noteImages[13].resize(40, 80);
   noteImages[14].resize(40, 80);
   noteImages[15].resize(40, 80);
-  noteImages[16].resize(40, 80);
-  noteImages[17].resize(40, 80);
-  noteImages[18].resize(40, 80);
-  noteImages[19].resize(40, 80);
-  noteImages[20].resize(80, 160);
-  noteImages[22].resize(80, 160);
-  noteImages[21].resize(40, 80);
+  noteImages[16].resize(25, 25);
+  noteImages[17].resize(25, 25);
+  
+  //Quarter Rests
+  noteImages[18].resize(30, 70);
+  noteImages[19].resize(30, 70);
+  
+  //Eight Rests
+  noteImages[20].resize(19, 30);
+  noteImages[21].resize(19, 30);
+  
+  //Sixteenth Rests
+  noteImages[22].resize(20, 45);
+  noteImages[23].resize(20, 45);
+  
+  //Half Rests
+  noteImages[24].resize(48, 90);
+  noteImages[25].resize(48, 90);
+  
+  //Whole Rests
+  noteImages[26].resize(48, 90);
+  noteImages[27].resize(48, 90);
+  
+  noteImages[28].resize(40, 80);
+  noteImages[29].resize(40, 80);
+  noteImages[30].resize(40, 80);
+  noteImages[31].resize(40, 80);
+  noteImages[32].resize(80, 160);
   size(600, 700);
   c1 = color(#5E86D8);
   c2 = color(#6C6C6C);
@@ -110,17 +157,29 @@ void setup() {
   pitchButtons[11] = new Button(200, 490, 100, 40, 25, #7FA3E0, #5E86D8, "37", "Major 7th");
   pitchButtons[12] = new Button(200, 560, 100, 40, 25, #7FA3E0, #5E86D8, "38", "Octave");
   pitchButtons[13] = new Button(200, 650, 80, 80, 25, #7FA3E0, #5E86D8, "39", "PLAY");
+
+  tuneButtons[0]=new Button(180, 300, 80, 80, 25, #FFEB05, #FC035A, "", "A");
+  tuneButtons[1]=new Button(300, 300, 80, 80, 25, #FFEB05, #FC035A, "", "A#/Bb");
+  tuneButtons[2]=new Button(420, 300, 80, 80, 25, #FFEB05, #FC035A, "", "B/Cb");
+  tuneButtons[3]=new Button(540, 300, 80, 80, 25, #FFEB05, #FC035A, "", "C/B#");
+  tuneButtons[4]=new Button(180, 420, 80, 80, 25, #FFEB05, #FC035A, "", "C#/Db");
+  tuneButtons[5]=new Button(300, 420, 80, 80, 25, #FFEB05, #FC035A, "", "D");
+  tuneButtons[6]=new Button(420, 420, 80, 80, 25, #FFEB05, #FC035A, "", "D#/Eb");
+  tuneButtons[7]=new Button(540, 420, 80, 80, 25, #FFEB05, #FC035A, "", "E/Fb");
+  tuneButtons[8]=new Button(180, 540, 80, 80, 25, #FFEB05, #FC035A, "", "F/E#");
+  tuneButtons[9]=new Button(300, 540, 80, 80, 25, #FFEB05, #FC035A, "", "F#/Gb");
+  tuneButtons[10]=new Button(420, 540, 80, 80, 25, #FFEB05, #FC035A, "", "G");
+  tuneButtons[11]=new Button(540, 540, 80, 80, 25, #FFEB05, #FC035A, "", "G#/Ab");
 }
 
 void mouseReleased() {
-if (pitchButtons[13].hover(mouseX, mouseY)) {
-    note1 = int(random(1,14));
-    note2 = note1 + int(random(0,13));
+  if (pitchButtons[13].hover(mouseX, mouseY)) {
+    note1 = int(random(1, 14));
+    note2 = note1 + int(random(0, 13));
     interval = note2-note1;
     println(interval);
   }
   if (pitchButtons[0].hover(mouseX, mouseY)) {
-    
   }
   for (int i=0; i<modeButtons.length; i++) {
     if (modeButtons[i].hover(mouseX, mouseY)) {
@@ -128,7 +187,7 @@ if (pitchButtons[13].hover(mouseX, mouseY)) {
       firstSwitch=true;
     }
   }
-    //Mo Spiegel 3B
+  //Mo Spiegel 3B
   for (int i = 0; i < harmButtons.length; i++) {
     if (harmButtons[i].hover(mouseX, mouseY) == true) {
       if (harmButtons[i] == harmButtons[0]) {
@@ -143,36 +202,62 @@ if (pitchButtons[13].hover(mouseX, mouseY)) {
         if (notes.get(notes.size()-1).inputted == false) {
           notes.get(notes.size()-1).noteTog = 3;
         }
+      } else if (harmButtons[i] == harmButtons[3]) {
+        if (notes.get(notes.size()-1).inputted == false) {
+          notes.get(notes.size()-1).noteTog = 4;
+        }
+      } else if (harmButtons[i] == harmButtons[4]) {
+        if (notes.get(notes.size()-1).inputted == false) {
+          notes.get(notes.size()-1).noteTog = 5;
+        }
+      } else if (harmButtons[i] == harmButtons[5]) {
+        if (notes.get(notes.size()-1).inputted == false && notes.get(notes.size()-1).restMode == false) {
+          notes.get(notes.size()-1).restMode = true;
+        } else if (notes.get(notes.size()-1).inputted == false && notes.get(notes.size()-1).restMode == true) {
+          notes.get(notes.size()-1).restMode = false;
+        }
       }
     }
   }
   if (modeTog==3&&firstSwitch==true) {
     firstSwitch=false;
-  } else if (modeTog == 3 && firstSwitch == false && mouseX>= 40 && mouseX<=540 && mouseY>= 60 && mouseY<=180) {
-    notes.get(notes.size()-1).mouseClick();
-    notes.get(notes.size()-1).inputNote();
-    notes.get(notes.size()-1).inputted = true;
+  } else if (modeTog == 3 && firstSwitch == false && mouseX>= 40 && mouseX<=580 && mouseY>= 60 && mouseY<=180) {
+    if ((notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x <=490) || (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x <=535) || (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x <=557) || (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x <=400) || (notes.get(notes.size()-1).noteTog == 5 && notes.get(notes.size()-1).x == 220)) {
+      notes.get(notes.size()-1).mouseClick();
+      notes.get(notes.size()-1).inputNote();
+      notes.get(notes.size()-1).inputted = true;
+    }
     if ( notes.size()-1 != 0) {
-      if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x+90 <= 490) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 1, false));
-      } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x+90 <= 535) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 2, false));
-      } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x+90 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 3, false));
-      } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x+45 <= 535) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 2, false));
-      } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x+45 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 3, false));
-      } else if (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x + 23 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 23, 3, false));
+      if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 490) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 1, false, false));
+      } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 535) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 2, false, false));
+      } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 558) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 3, false, false));
+      } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x + 45 <= 535) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 2, false, false));
+      } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x + 45 <= 558) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 3, false, false));
+      } else if (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x + 22 <= 558) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 22, 3, false, false));
+      } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 400) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 4, false, false));
+      } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 490) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 1, false, false));
+      } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 535) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 2, false, false));
+      } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 558) {
+        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 3, false, false));
       }
     } else if (notes.size()-1 == 0) {
       if (notes.get(0).noteTog == 1) {
-        notes.add(new Note (125, 0, 220+90, 1, false));
+        notes.add(new Note (125, 0, 220+90, 1, false, false));
       } else if (notes.get(0).noteTog == 2) {
-        notes.add(new Note (125, 0, 220+45, 2, false));
+        notes.add(new Note (125, 0, 220+45, 2, false, false));
       } else if (notes.get(0).noteTog == 3) {
-        notes.add(new Note (125, 0, 220 + 23, 3, false));
+        notes.add(new Note (125, 0, 220 + 22, 3, false, false));
+      } else if (notes.get(0).noteTog == 4) {
+        notes.add(new Note(125, 0, 220 +180, 4, false, false));
       }
     }
 
@@ -180,18 +265,27 @@ if (pitchButtons[13].hover(mouseX, mouseY)) {
   }
 }
 
-//void mousePressed() {
-//Kai Yun Chao | 3B
-//for(int i = 0; i<tuneButtons.length; i++){
-  //if(tuneButtons[i].over&&tuneButtons[i].val.equals("A"))
-  //pitch[].play();
- //}else if (file.isPlaying()){
-   //file.pause();
- //}else{
-   //file.play();
-//}
+void mousePressed() {
 
-//}
+  //Kai Yun Chao | 3B
+  for (int i = 0; i<tuneButtons.length; i++) {
+    if (tuneButtons[i].over&&tuneButtons[i].val.equals("C/B#")) {
+      pitchC.play();
+      println("test");
+      //if (pitchC.isPlaying()) {
+      //  pitchC.stop();
+      //} else {
+      //  pitchC.play();
+      //}
+      //  if (tuneButtons[i].over&&tuneButtons[i].val.equals("A"))
+      //    pitchA.play();
+      //} else if (file.isPlaying()) {
+      //  file.pause();
+      //} else {
+      //  file.play();
+      //}
+    }
+  }
 
 void draw() {
   background(75);
@@ -256,28 +350,31 @@ void display() {
 
 void tunerMode() {
   //Kai Yun Chao | 3B
-  
+
   fill(255);
-  rect(360,120,440,160,25);
-  
+  rect(360, 120, 440, 160, 25);
+
   rectMode(CENTER);
   fill(#2B7FD6);
   //rect(370, 233);
   textAlign(CENTER, CENTER);
   textSize(65);
 
-  tuneButtons[0]=new Button(155, 300, 80, 80, 25, #7FA3E0, #5E86D8, "", "A");
-  tuneButtons[1]=new Button(365, 300, 80, 80, 25, #7FA3E0, #5E86D8, "", "A#/Bb");
-  tuneButtons[2]=new Button(420, 300, 80, 80, 25, #7FA3E0, #5E86D8, "", "B/Cb");
-  tuneButtons[3]=new Button(540, 300, 80, 80, 25, #7FA3E0, #5E86D8, "", "C/B#");
-  tuneButtons[4]=new Button(180, 420, 80, 80, 25, #7FA3E0, #5E86D8, "", "C#/Db");
-  tuneButtons[5]=new Button(300, 420, 80, 80, 25, #7FA3E0, #5E86D8, "", "D");
-  tuneButtons[6]=new Button(420, 420, 80, 80, 25, #7FA3E0, #5E86D8, "", "D#/Eb");
-  tuneButtons[7]=new Button(540, 420, 80, 80, 25, #7FA3E0, #5E86D8, "", "E/Fb");
-  tuneButtons[8]=new Button(180, 540, 80, 80, 25, #7FA3E0, #5E86D8, "", "F/E#");
-  tuneButtons[9]=new Button(300, 540, 80, 80, 25, #7FA3E0, #5E86D8, "", "F#/Gb");
-  tuneButtons[10]=new Button(420, 540, 80, 80, 25, #7FA3E0, #5E86D8, "", "G");
-  tuneButtons[11]=new Button(540, 540, 80, 80, 25, #7FA3E0, #5E86D8, "", "G#/Ab");
+  tuneButtons[0].display();
+  tuneButtons[1].display();
+  tuneButtons[2].display();
+  tuneButtons[3].display();
+  tuneButtons[4].display();
+  tuneButtons[5].display();
+  tuneButtons[6].display();
+  tuneButtons[7].display();
+  tuneButtons[8].display();
+  tuneButtons[9].display();
+  tuneButtons[10].display();
+  tuneButtons[11].display();
+
+  //pitch[0] = new SoundFile(this, "C5.mp3");
+  //pitch[1] = new SoundFile(this, "A5.mp3");
 }
 
 void pitchMode() {
@@ -331,7 +428,7 @@ void harmMode() {
   line(140, 140, 580, 140);
   line(140, 160, 580, 160);
   if (notes.size() == 0) {
-    notes.add(new Note(125, 0, 220, 2, false));
+      notes.add(new Note(125, 0, 220, 2, false, false));
   }
   for (int i = 0; i < notes.size(); i++) {
     notes.get(i).hover();
@@ -344,17 +441,6 @@ void harmMode() {
   if (notes.size()==8) {
     harmonize();
   }
-  //image(noteImages[0], 100, 50);
-  //image(noteImages[1], 200, 50);
-  //image(noteImages[2], 300, 50);
-  //image(noteImages[3], 400, 50);
-  //image(noteImages[4], 100, 40);
-  //image(noteImages[5], 500, 50);
-  //image(noteImages[6], 50, 40);
-  //image(noteImages[7], 600, 50);
-  //image(noteImages[8], 100, 150);
-  //image(noteImages[9], 200, 150);
-  //image(noteImages[10], 200, 80);
 }
 
 void harmonize() {
@@ -386,6 +472,7 @@ void harmonize() {
     keyConvert.put(6, "G");
     keyConvert.put(5, "A");
     keyConvert.put(4, "B");
+    keyConvert.put(0,"rest");
   }
   for (int i=0; i<notes.size(); i++) {
     inputScore.append(keyConvert.get(notes.get(i).yVal()));
