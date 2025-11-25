@@ -141,7 +141,7 @@ void setup() {
   harmButtons[2] = new Button(320,30,60,40,25,#7FA3E0, #5E86D8, "3", "Sixt");
   harmButtons[3] = new Button(395,30,60,40,25,#7FA3E0, #5E86D8, "4", "Half");
   harmButtons[4] = new Button(470,30,60,40,25,#7FA3E0, #5E86D8, "5", "Whole");
-  harmButtons[5] = new Button(545,30,60,40,25,#7FA3E0, #5E86D8, "6", "Dot");
+  harmButtons[5] = new Button(545,30,60,40,25,#7FA3E0, #5E86D8, "6", "Rest");
 
   pitchButtons[0] = new Button(200, 70, 100, 40, 25, #7FA3E0, #5E86D8, "31", "Unison");
   pitchButtons[1] = new Button(320, 140, 100, 40, 25, #7FA3E0, #5E86D8, "31.5", "Minor 2nd");
