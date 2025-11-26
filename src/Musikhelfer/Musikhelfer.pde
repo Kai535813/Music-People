@@ -1,4 +1,3 @@
-
 //Ethan Tang | 3B | 11/4/25
 import processing.sound.*;
 SoundFile pitch, pitchC;
@@ -114,14 +113,20 @@ void setup() {
   noteImages[26].resize(48, 90);
   noteImages[27].resize(48, 90);
 
-  noteImages[28].resize(40, 80);
-  noteImages[29].resize(40, 80);
-  noteImages[30].resize(40, 80);
-  noteImages[31].resize(40, 80);
+  //Flats
+  noteImages[28].resize(17, 27);
+  noteImages[29].resize(17, 27);
+  
+  //Sharps
+  noteImages[30].resize(17, 25);
+  noteImages[31].resize(17, 25);
+  
   noteImages[32].resize(80, 160);
+  
   size(600, 700);
   c1 = color(#5E86D8);
   c2 = color(#6C6C6C);
+  
   //Simon Sakata | 3B
   modeButtons[0]=new Button(60, 120, 100, 100, 25, #7FA3E0, #5E86D8, "1", "Pitch Ear Training");
   modeButtons[1]=new Button(60, 270, 100, 100, 25, #7FA3E0, #5E86D8, "2", "Tuner");
@@ -223,17 +228,17 @@ void mouseReleased() {
       } else if (harmButtons[i] == harmButtons[6]) {
         notes.clear();
       } else if (harmButtons[i] == harmButtons[7]) {
-        if (notes.get(notes.size()-1).sharp == false) {
+        if (notes.get(notes.size()-1).sharp == false && notes.get(notes.size()-1).restMode == false) {
           notes.get(notes.size()-1).flat = false;
           notes.get(notes.size()-1).sharp = true;
-        } else if (notes.get(notes.size()-1).sharp == true) {
+        } else if (notes.get(notes.size()-1).sharp == true && notes.get(notes.size()-1).restMode == false) {
           notes.get(notes.size()-1).sharp = false;
-        }  
+        }
       } else if (harmButtons[i] == harmButtons[8]) {
-        if (notes.get(notes.size()-1).flat == false) {
+        if (notes.get(notes.size()-1).flat == false && notes.get(notes.size()-1).restMode == false) {
           notes.get(notes.size()-1).sharp = false;
           notes.get(notes.size()-1).flat = true;
-        } else if (notes.get(notes.size()-1).flat == true) {
+        } else if (notes.get(notes.size()-1).flat == true && notes.get(notes.size()-1).restMode == false) {
           notes.get(notes.size()-1).flat = false;
         }
       }
