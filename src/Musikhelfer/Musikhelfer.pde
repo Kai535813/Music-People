@@ -4,13 +4,13 @@ SoundFile pitch, pitchC;
 import java.util.Map;
 HashMap<Integer, String> keyConvert= new HashMap<Integer, String>();
 ArrayList<Note> notes = new ArrayList<Note>();
-PImage[] noteImages = new PImage[33];
+PImage[] noteImages = new PImage[35];
 boolean mouseClicked, firstSwitch;
 StringList inputScore;
 StringList harmonizeRes;
 Button[] modeButtons=new Button[4];
 Button[] tuneButtons=new Button[12];
-Button[] harmButtons=new Button[9];
+Button[] harmButtons=new Button[12];
 Button[] metroButtons=new Button[3];
 Button[] pitchButtons=new Button[14];
 int modeTog, clef;
@@ -25,6 +25,8 @@ int interval, note1, note2;
 
 
 void setup() {
+  clef = 1;
+
   pitch = new SoundFile(this, "C5.mp3");
   pitchC = new SoundFile(this, "C5.mp3");
   //pitchA = new SoundFile(this, "A5.mp3");
@@ -73,6 +75,8 @@ void setup() {
   noteImages[30] = loadImage("Sharp.png");
   noteImages[31] = loadImage("Sharp (HOVER).png");
   noteImages[32] = loadImage("Final Play.png");
+  noteImages[33] = loadImage("rTreble Clef.png");
+  noteImages[34] = loadImage("rBass Clef.png");
 
   noteImages[0].resize(40, 80);
   noteImages[1].resize(40, 80);
@@ -116,17 +120,21 @@ void setup() {
   //Flats
   noteImages[28].resize(17, 27);
   noteImages[29].resize(17, 27);
-  
+
   //Sharps
   noteImages[30].resize(17, 25);
   noteImages[31].resize(17, 25);
-  
+
   noteImages[32].resize(80, 160);
-  
+
+  //Clefs
+  noteImages[33].resize(65, 140);
+  noteImages[34].resize(60, 96);
+
   size(600, 700);
   c1 = color(#5E86D8);
   c2 = color(#6C6C6C);
-  
+
   //Simon Sakata | 3B
   modeButtons[0]=new Button(60, 120, 100, 100, 25, #7FA3E0, #5E86D8, "1", "Pitch Ear Training");
   modeButtons[1]=new Button(60, 270, 100, 100, 25, #7FA3E0, #5E86D8, "2", "Tuner");
@@ -141,7 +149,7 @@ void setup() {
   metroButtons[2] = new Button(362, 475, 100, 75, 25, #767676, #767676, "0", "PLAY");
   metroVal = "100";
 
-  //Buttons for changing note values: Will change labels later, these are temporary
+  //Mo Spiegel
   harmButtons[0] = new Button(170, 30, 60, 40, 25, #7FA3E0, #5E86D8, "1", "Quart");
   harmButtons[1] = new Button(245, 30, 60, 40, 25, #7FA3E0, #5E86D8, "2", "Eight");
   harmButtons[2] = new Button(320, 30, 60, 40, 25, #7FA3E0, #5E86D8, "3", "Sixt");
@@ -151,6 +159,9 @@ void setup() {
   harmButtons[6] = new Button(358, 220, 135, 40, 25, #7FA3E0, #5E86D8, "7", "Clear" );
   harmButtons[7] = new Button(245, 220, 60, 40, 25, #7FA3E0, #5E86D8, "8", "#");
   harmButtons[8] = new Button(470, 220, 60, 40, 25, #7FA3E0, #5E86D8, "9", "b");
+  harmButtons[9] = new Button(170, 260, 60, 120, 25, #7FA3E0, #5E86D8, "10", "Clef \n Tog");
+  harmButtons[10] = new Button(545, 260, 60, 120, 25, #7FA3E0, #5E86D8, "11", "Del");
+  harmButtons[11] = new Button(358, 300, 270, 90, 25, #7FA3E0, #5E86D8, "12", "Harmonize");
 
   pitchButtons[0] = new Button(200, 70, 100, 40, 25, #7FA3E0, #5E86D8, "31", "Unison");
   pitchButtons[1] = new Button(320, 140, 100, 40, 25, #7FA3E0, #5E86D8, "31.5", "Minor 2nd");
@@ -181,6 +192,23 @@ void setup() {
   tuneButtons[11]=new Button(540, 540, 80, 80, 25, #FFEB05, #FC035A, "", "G#/Ab");
 }
 
+void keyPressed() {
+  if (modeTog==3&&firstSwitch==true) {
+    firstSwitch=false;
+  } else if (firstSwitch == false && modeTog == 3) {
+    if (keyCode == 8 || keyCode == 127) {
+      if (notes.size()-1 >= 0) {
+        if (notes.get(notes.size()-1).inputted == true && ((notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x == 490) || (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x == 535) || (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x >= 550) || (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x == 400) || (notes.get(notes.size()-1).noteTog == 5 && notes.get(notes.size()-1).x == 220))) {
+          notes.remove(notes.size()-1);
+        } else if (notes.size()-1 != 0) {
+          notes.remove(notes.size()-2);
+          notes.remove(notes.size()-1);
+        }
+      }
+    }
+  }
+}
+
 void mouseReleased() {
   if (pitchButtons[13].hover(mouseX, mouseY)) {
     note1 = int(random(1, 14));
@@ -197,92 +225,78 @@ void mouseReleased() {
     }
   }
   //Mo Spiegel 3B
-  for (int i = 0; i < harmButtons.length; i++) {
-    if (harmButtons[i].hover(mouseX, mouseY) == true) {
-      if (harmButtons[i] == harmButtons[0]) {
-        if (notes.get(notes.size()-1).inputted == false) {
-          notes.get(notes.size()-1).noteTog = 1;
-        }
-      } else if (harmButtons[i] == harmButtons[1]) {
-        if (notes.get(notes.size()-1).inputted == false) {
-          notes.get(notes.size()-1).noteTog = 2;
-        }
-      } else if (harmButtons[i] == harmButtons[2]) {
-        if (notes.get(notes.size()-1).inputted == false) {
-          notes.get(notes.size()-1).noteTog = 3;
-        }
-      } else if (harmButtons[i] == harmButtons[3]) {
-        if (notes.get(notes.size()-1).inputted == false) {
-          notes.get(notes.size()-1).noteTog = 4;
-        }
-      } else if (harmButtons[i] == harmButtons[4]) {
-        if (notes.get(notes.size()-1).inputted == false) {
-          notes.get(notes.size()-1).noteTog = 5;
-        }
-      } else if (harmButtons[i] == harmButtons[5]) {
-        if (notes.get(notes.size()-1).inputted == false && notes.get(notes.size()-1).restMode == false) {
-          notes.get(notes.size()-1).restMode = true;
-        } else if (notes.get(notes.size()-1).inputted == false && notes.get(notes.size()-1).restMode == true) {
-          notes.get(notes.size()-1).restMode = false;
-        }
-      } else if (harmButtons[i] == harmButtons[6]) {
-        notes.clear();
-      } else if (harmButtons[i] == harmButtons[7]) {
-        if (notes.get(notes.size()-1).sharp == false && notes.get(notes.size()-1).restMode == false) {
-          notes.get(notes.size()-1).flat = false;
-          notes.get(notes.size()-1).sharp = true;
-        } else if (notes.get(notes.size()-1).sharp == true && notes.get(notes.size()-1).restMode == false) {
-          notes.get(notes.size()-1).sharp = false;
-        }
-      } else if (harmButtons[i] == harmButtons[8]) {
-        if (notes.get(notes.size()-1).flat == false && notes.get(notes.size()-1).restMode == false) {
-          notes.get(notes.size()-1).sharp = false;
-          notes.get(notes.size()-1).flat = true;
-        } else if (notes.get(notes.size()-1).flat == true && notes.get(notes.size()-1).restMode == false) {
-          notes.get(notes.size()-1).flat = false;
-        }
-      }
-    }
-  }
   if (modeTog==3&&firstSwitch==true) {
     firstSwitch=false;
-  } else if (modeTog == 3 && firstSwitch == false && mouseX>= 40 && mouseX<=580 && mouseY>= 60 && mouseY<=180) {
-    if ((notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x <=490) || (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x <=535) || (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x <=558) || (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x <=400) || (notes.get(notes.size()-1).noteTog == 5 && notes.get(notes.size()-1).x == 220)) {
-      notes.get(notes.size()-1).mouseClick();
-      notes.get(notes.size()-1).inputNote();
-      notes.get(notes.size()-1).inputted = true;
-    }
-    if ( notes.size()-1 != 0) {
-      if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 490) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 1, false, false, false, false));
-      } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 535) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 2, false, false, false, false));
-      } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 3, false, false, false, false));
-      } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x + 45 <= 535) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 2, false, false, false, false));
-      } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x + 45 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 3, false, false, false, false));
-      } else if (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x + 22 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 22, 3, false, false, false, false));
-      } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 400) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 4, false, false, false, false));
-      } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 490) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 1, false, false, false, false));
-      } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 535) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 2, false, false, false, false));
-      } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 558) {
-        notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 3, false, false, false, false));
+  } else if (firstSwitch == false && modeTog == 3) {
+    for (int i = 0; i < harmButtons.length; i++) {
+      if (harmButtons[i].hover(mouseX, mouseY) == true) {
+        if (harmButtons[i] == harmButtons[0]) {
+          if (notes.get(notes.size()-1).inputted == false) {
+            notes.get(notes.size()-1).noteTog = 1;
+          }
+        } else if (harmButtons[i] == harmButtons[1]) {
+          if (notes.get(notes.size()-1).inputted == false) {
+            notes.get(notes.size()-1).noteTog = 2;
+          }
+        } else if (harmButtons[i] == harmButtons[2]) {
+          if (notes.get(notes.size()-1).inputted == false) {
+            notes.get(notes.size()-1).noteTog = 3;
+          }
+        } else if (harmButtons[i] == harmButtons[3]) {
+          if (notes.get(notes.size()-1).inputted == false) {
+            notes.get(notes.size()-1).noteTog = 4;
+          }
+        } else if (harmButtons[i] == harmButtons[4]) {
+          if (notes.get(notes.size()-1).inputted == false) {
+            notes.get(notes.size()-1).noteTog = 5;
+          }
+        } else if (harmButtons[i] == harmButtons[5]) {
+          if (notes.get(notes.size()-1).inputted == false && notes.get(notes.size()-1).restMode == false) {
+            notes.get(notes.size()-1).restMode = true;
+          } else if (notes.get(notes.size()-1).inputted == false && notes.get(notes.size()-1).restMode == true) {
+            notes.get(notes.size()-1).restMode = false;
+          }
+        } else if (harmButtons[i] == harmButtons[6]) {
+          notes.clear();
+        } else if (harmButtons[i] == harmButtons[7]) {
+          if (notes.get(notes.size()-1).sharp == false && notes.get(notes.size()-1).restMode == false && notes.get(notes.size()-1).inputted == false) {
+            notes.get(notes.size()-1).flat = false;
+            notes.get(notes.size()-1).sharp = true;
+          } else if (notes.get(notes.size()-1).sharp == true && notes.get(notes.size()-1).restMode == false && notes.get(notes.size()-1).inputted == false) {
+            notes.get(notes.size()-1).sharp = false;
+          }
+        } else if (harmButtons[i] == harmButtons[8]) {
+          if (notes.get(notes.size()-1).flat == false && notes.get(notes.size()-1).restMode == false && notes.get(notes.size()-1).inputted == false) {
+            notes.get(notes.size()-1).sharp = false;
+            notes.get(notes.size()-1).flat = true;
+          } else if (notes.get(notes.size()-1).flat == true && notes.get(notes.size()-1).restMode == false && notes.get(notes.size()-1).inputted == false) {
+            notes.get(notes.size()-1).flat = false;
+          }
+        } else if (harmButtons[i] == harmButtons[9]) {
+          if (clef == 1) {
+            clef = 2;
+          } else if (clef == 2) {
+            clef = 1;
+          }
+        } else if (harmButtons[i] == harmButtons[10]) {
+          if (notes.size()-1 >= 0) {
+            if (notes.get(notes.size()-1).inputted == true && ((notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x == 490) || (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x == 535) || (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x >= 550) || (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x == 400) || (notes.get(notes.size()-1).noteTog == 5 && notes.get(notes.size()-1).x == 220))) {
+              notes.remove(notes.size()-1);
+            } else if (notes.size()-1 != 0) {
+              notes.remove(notes.size()-2);
+              notes.remove(notes.size()-1);
+            }
+          }
+        } else if (harmButtons[i] == harmButtons[11]) {
+          harmonize();
+        }
       }
-    } else if (notes.size()-1 == 0) {
-      if (notes.get(0).noteTog == 1) {
-        notes.add(new Note (125, 0, 220+90, 1, false, false, false, false));
-      } else if (notes.get(0).noteTog == 2) {
-        notes.add(new Note (125, 0, 220+45, 2, false, false, false, false));
-      } else if (notes.get(0).noteTog == 3) {
-        notes.add(new Note (125, 0, 220 + 22, 3, false, false, false, false));
-      } else if (notes.get(0).noteTog == 4) {
-        notes.add(new Note(125, 0, 220 +180, 4, false, false, false, false));
+    }
+    if (mouseX>= 40 && mouseX<=580 && mouseY>= 60 && mouseY<=180) {
+      if ((notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x <=490) || (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x <=535) || (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x <=558) || (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x <=400) || (notes.get(notes.size()-1).noteTog == 5 && notes.get(notes.size()-1).x == 220)) {
+        notes.get(notes.size()-1).mouseClick();
+        notes.get(notes.size()-1).inputNote();
+        notes.get(notes.size()-1).inputted = true;
       }
     }
 
@@ -447,14 +461,44 @@ void harmMode() {
   fill(255);
   rect(140, 60, 440, 120, 25);
   stroke(0);
-  strokeWeight(1);
-  line(140, 80, 580, 80);
-  line(140, 100, 580, 100);
-  line(140, 120, 580, 120);
-  line(140, 140, 580, 140);
-  line(140, 160, 580, 160);
+  for (int i = 80; i <= 160; i = i + 20) {
+    line(140, i, 580, i);
+  }
   if (notes.size() == 0) {
     notes.add(new Note(125, 0, 220, 2, false, false, false, false));
+  }
+  if ( notes.size()-1 != 0) {
+    if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 490 && notes.get(notes.size()-1).inputted == true) {
+      notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 1, false, false, false, false));
+    } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 535 && notes.get(notes.size()-1).inputted == true) {
+      notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 2, false, false, false, false));
+    } else if (notes.get(notes.size()-1).noteTog == 1 && notes.get(notes.size()-1).x + 90 <= 558 && notes.get(notes.size()-1).inputted == true) {
+      notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 90, 3, false, false, false, false));
+    } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x + 45 <= 535 && notes.get(notes.size()-1).inputted == true) {
+      notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 2, false, false, false, false));
+    } else if (notes.get(notes.size()-1).noteTog == 2 && notes.get(notes.size()-1).x + 45 <= 558 && notes.get(notes.size()-1).inputted == true) {
+      notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 45, 3, false, false, false, false));
+    } else if (notes.get(notes.size()-1).noteTog == 3 && notes.get(notes.size()-1).x + 22 <= 558 && notes.get(notes.size()-1).inputted == true) {
+      notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 22, 3, false, false, false, false));
+    } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 400 && notes.get(notes.size()-1).inputted == true) {
+      notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 4, false, false, false, false));
+    } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 490 && notes.get(notes.size()-1).inputted == true) {
+      notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 1, false, false, false, false));
+    } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 535 && notes.get(notes.size()-1).inputted == true) {
+      notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 2, false, false, false, false));
+    } else if (notes.get(notes.size()-1).noteTog == 4 && notes.get(notes.size()-1).x + 180 <= 558 && notes.get(notes.size()-1).inputted == true) {
+      notes.add(new Note(125, 0, notes.get(notes.size()-1).x + 180, 3, false, false, false, false));
+    }
+  } else if (notes.size()-1 == 0) {
+    if (notes.get(0).noteTog == 1 && notes.get(notes.size()-1).inputted == true) {
+      notes.add(new Note (125, 0, 220+90, 1, false, false, false, false));
+    } else if (notes.get(0).noteTog == 2 && notes.get(notes.size()-1).inputted == true) {
+      notes.add(new Note (125, 0, 220+45, 2, false, false, false, false));
+    } else if (notes.get(0).noteTog == 3 && notes.get(notes.size()-1).inputted == true) {
+      notes.add(new Note (125, 0, 220 + 22, 3, false, false, false, false));
+    } else if (notes.get(0).noteTog == 4 && notes.get(notes.size()-1).inputted == true) {
+      notes.add(new Note(125, 0, 220 +180, 4, false, false, false, false));
+    }
   }
   for (int i = 0; i < notes.size(); i++) {
     notes.get(i).hover();
@@ -464,8 +508,10 @@ void harmMode() {
     harmButtons[i].display();
     harmButtons[i].hover(mouseX, mouseY);
   }
-  if (notes.size()==8) {
-    harmonize();
+  if (clef == 1) {
+    image(noteImages[33], 170, 125);
+  } else if (clef == 2) {
+    image(noteImages[34], 175, 115);
   }
 }
 
