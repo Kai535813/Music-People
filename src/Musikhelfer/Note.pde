@@ -306,16 +306,16 @@ class Note {
       } else if (noteTog == 2) {
         image(noteImages[5], x, 118);
         if (sharp == true) {
-          image(noteImages[30], x+1, 81);
+          image(noteImages[30], x+3, 81);
         } else if (flat == true) {
-          image(noteImages[28], x-1, 81);
+          image(noteImages[28], x+2, 81);
         }
       } else if (noteTog == 3) {
         image(noteImages[9], x, 118);
         if (sharp == true) {
-          image(noteImages[30], x+1, 81);
+          image(noteImages[30], x+3, 81);
         } else if (flat == true) {
-          image(noteImages[28], x-1, 81);
+          image(noteImages[28], x+2, 81);
         }
       } else if (noteTog == 4) {
         image(noteImages[13], x, 118);
@@ -344,16 +344,16 @@ class Note {
       } else if (noteTog == 2) {
         image(noteImages[5], x, 128);
         if (sharp == true) {
-          image(noteImages[30], x+1, 91);
+          image(noteImages[30], x+3, 91);
         } else if (flat == true) {
-          image(noteImages[28], x-1, 91);
+          image(noteImages[28], x+2, 91);
         }
       } else if (noteTog == 3) {
         image(noteImages[9], x, 128);
         if (sharp == true) {
-          image(noteImages[30], x+1, 91);
+          image(noteImages[30], x+3, 91);
         } else if (flat == true) {
-          image(noteImages[28], x-1, 91);
+          image(noteImages[28], x+2, 91);
         }
       } else if (noteTog == 4) {
         image(noteImages[13], x, 128);
@@ -382,16 +382,16 @@ class Note {
       } else if (noteTog == 2) {
         image(noteImages[5], x, 138);
         if (sharp == true) {
-          image(noteImages[30], x+1, 101);
+          image(noteImages[30], x+3, 101);
         } else if (flat == true) {
-          image(noteImages[28], x-1, 101);
+          image(noteImages[28], x+2, 101);
         }
       } else if (noteTog == 3) {
         image(noteImages[9], x, 138);
         if (sharp == true) {
-          image(noteImages[30], x+1, 101);
+          image(noteImages[30], x+3, 101);
         } else if (flat == true) {
-          image(noteImages[28], x-1, 101);
+          image(noteImages[28], x+2, 101);
         }
       } else if (noteTog == 4) {
         image(noteImages[13], x, 138);
